@@ -16,6 +16,10 @@ var current_item
 
 var action_list = []
 
+var current_money
+
+var item_button_dict = {}
+
 func _ready():
 	connect_ui_buttons()
 	set_pause_mode(PAUSE_MODE_PROCESS)
@@ -42,6 +46,8 @@ func add_level(level):
 	move_child(current_level, 0)
 	current_level.set_pause_mode(PAUSE_MODE_STOP)
 	get_tree().set_pause(true)
+	current_money = current_level.starting_money
+	update_money()
 
 func completely_reset_level():
 	action_list = []
@@ -65,7 +71,7 @@ func _input(event):
 			if world_position_on_map(event.position):
 				if current_item:
 					if validity_test(event.position):
-						apply_item(event.position)
+						apply_and_record_item(event.position)
 
 # Tests if a position is on the map. If false, it's on the UI
 func world_position_on_map(world_position):
@@ -73,7 +79,7 @@ func world_position_on_map(world_position):
 
 func update_placement_cursor(event_position):
 	if world_position_on_map(event_position):
-		if current_item:
+		if not current_item == null:
 			var tilemap = current_level.get_node("TileMap")
 			var snapped_position = tilemap.map_to_world(
 				tilemap.world_to_map(event_position))
@@ -83,25 +89,33 @@ func update_placement_cursor(event_position):
 				placement_cursor.texture = valid_cursor
 			else:
 				placement_cursor.texture = invalid_cursor
+		else:
+			placement_cursor.set_visible(false)
 	else:
 		placement_cursor.set_visible(false)
 
 func validity_test(world_position):
 	return(current_level.callv(current_item.get_placeable_name() + "_validity", [world_position]))
 
-func apply_item(world_position):
+func apply_and_record_item(world_position):
 	action_list.append(
 		{
-			"item": current_item.get_placeable_name(),
+			"item": current_item,
 			"position": world_position
 		}
 	)
-	current_level.callv(current_item.get_placeable_name() + "_application", [world_position])
+	apply_item(current_item, world_position)
+
 
 func reset_level_and_apply_action_list():
 	add_level(packaged_current_level)
 	for action in action_list:
-		current_level.callv(action["item"] + "_application", [action["position"]])
+		apply_item(action["item"], action["position"])
+
+func apply_item(item, world_position):
+	current_money -= item.get_cost()
+	update_money()
+	current_level.callv(item.get_placeable_name() + "_application", [world_position])
 
 func start_stop():
 	if get_tree().is_paused():
@@ -115,6 +129,7 @@ func undo():
 	reset_level_and_apply_action_list()
 
 func init_item_buttons(item_dict):
+	item_button_dict = {}
 	for child in $hud.get_node("background/item_buttons").get_children():
 		child.queue_free()
 	for item_name in item_dict:
@@ -123,6 +138,24 @@ func init_item_buttons(item_dict):
 		button.connect("button_up", self, "item_swap_callback",
 			[item_name])
 		$hud.get_node("background/item_buttons").add_child(button)
+		var item_instance = item_dict[item_name].instance()
+		item_button_dict[item_instance.get_placeable_name()] = {
+			"button": button,
+			"cost": item_instance.get_cost()
+		}
 
 func item_swap_callback(item_name):
 	current_item = current_level.items[item_name].instance()
+
+func update_money():
+	$hud.get_node("money").set_text("£" + str(current_money))
+	update_item_buttons()
+
+func update_item_buttons():
+	for item_name in item_button_dict:
+		if item_button_dict[item_name]["cost"] > current_money:
+			item_button_dict[item_name]["button"].set_disabled(true)
+			if not current_item == null and item_name == current_item.get_placeable_name():
+				current_item = null
+		else:
+			item_button_dict[item_name]["button"].set_disabled(false)

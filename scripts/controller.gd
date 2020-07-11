@@ -27,6 +27,8 @@ var items = {
 	"Petrol Can": PETROL_CAN
 }
 
+var starting_money = 10
+
 var grid = []
 
 func _ready():
