@@ -16,6 +16,7 @@ var scenes_by_tile_name = {
 var entities = []
 
 func _ready():
+	tilemap.set_visible(false)
 	init_entities()
 	
 func init_entities():
@@ -33,6 +34,7 @@ func init_entities():
 			instance.init(coord)
 			entities[index] = instance
 			add_child(instance)
+			instance.set_position(tilemap.map_to_world(coord))
 	
 	for entity in entities:
 		if entity != null:

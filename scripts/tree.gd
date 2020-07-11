@@ -1,6 +1,8 @@
-extends Node
+extends Node2D
 
 onready var fsm = $fire_state_machine
+
+onready var on_fire_texture = preload("res://assets/tree_fire_full.png")
 
 var pos
 
@@ -11,4 +13,5 @@ func init(coord):
 	pos = coord
 
 func _on_fire():
+	$Sprite.set_texture(on_fire_texture)
 	print("tree ", pos, " is on fire!")
