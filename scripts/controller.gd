@@ -14,22 +14,24 @@ const PLANT_KILLER = preload("res://nodes/plantkiller.tscn")
 const CIGARETTE = preload("res://nodes/cigarette.tscn")
 const PETROL_CAN = preload("res://nodes/petrol.tscn")
 
+const ICE_BLOCK = preload("res://nodes/ice_block.tscn")
+
 var scenes_by_tile_name = {
 	"campfire": CAMPFIRE,
 	"tree": TREE,
 	"dry_trees": DRY_TREE,
 	"treehouse": TREEHOUSE,
+	"icecube": ICE_BLOCK,
 }
 
 var items = {
 	"Plant Killer": PLANT_KILLER,
 	"Cigarette": CIGARETTE,
-	"Petrol Can": PETROL_CAN
+	"Petrol Can": PETROL_CAN,
+	"Ice cube": ICE_BLOCK
 }
 
 var starting_money = 10
-
-var grid = []
 
 func _ready():
 	tilemap.set_visible(false)
@@ -37,7 +39,6 @@ func _ready():
 
 func init_entities():
 	var rect = tilemap.get_used_rect()
-	grid.resize(rect.get_area())
 
 	for coord in tilemap.get_used_cells():
 		var index = coord_to_index(rect, coord)
@@ -100,3 +101,16 @@ func petrol_application(world_position):
 	var petrol = PETROL_CAN.instance()
 	petrol.set_position(tilemap.map_to_world(tilemap.world_to_map(world_position)))
 	add_child(petrol)
+
+func ice_block_validity(world_position):
+	for child in get_children():
+		if child.has_method("get_placeable_name"):
+			if tilemap.world_to_map(child.position) == tilemap.world_to_map(world_position):
+				return(false)
+	return(true)
+
+func ice_block_application(world_position):
+	var petrol = ICE_BLOCK.instance()
+	petrol.set_position(tilemap.map_to_world(tilemap.world_to_map(world_position)))
+	add_child(petrol)
+
