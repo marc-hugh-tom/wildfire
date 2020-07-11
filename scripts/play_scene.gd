@@ -119,6 +119,7 @@ func apply_item(item, world_position):
 
 func start_stop():
 	if get_tree().is_paused():
+		disable_item_buttons()
 		get_tree().set_pause(false)
 	else:
 		get_tree().set_pause(true)
@@ -159,3 +160,7 @@ func update_item_buttons():
 				current_item = null
 		else:
 			item_button_dict[item_name]["button"].set_disabled(false)
+
+func disable_item_buttons():
+	for item_name in item_button_dict:
+		item_button_dict[item_name]["button"].set_disabled(true)
