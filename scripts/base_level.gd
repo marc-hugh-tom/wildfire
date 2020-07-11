@@ -15,6 +15,7 @@ const CIGARETTE = preload("res://nodes/cigarette.tscn")
 const PETROL_CAN = preload("res://nodes/petrol.tscn")
 
 const ICE_BLOCK = preload("res://nodes/ice_block.tscn")
+const FIREWORK = preload("res://nodes/firework.tscn")
 
 var scenes_by_tile_name = {
 	"campfire": CAMPFIRE,
@@ -23,7 +24,8 @@ var scenes_by_tile_name = {
 	"treehouse": TREEHOUSE,
 	"icecube": ICE_BLOCK,
 	"petrol": PETROL_CAN,
-	"cigarette": CIGARETTE
+	"cigarette": CIGARETTE,
+	"firework": FIREWORK
 }
 
 var all_items = {
