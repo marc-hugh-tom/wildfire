@@ -8,7 +8,7 @@ func get_initial_heat():
 	return 0
 	
 func get_initial_flash_point():
-	return 2
+	return 4
 	
 func get_initial_fuel():
 	return 5
@@ -28,5 +28,5 @@ func get_description():
 func on_heat_incremented(heat):
 	if heat == 1:
 		$Sprite.set_texture(tree_fire_start_texture)
-	elif heat >= 2:
+	elif heat >= 3:
 		$Sprite.set_texture(tree_fire_full_texture)
