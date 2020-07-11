@@ -31,6 +31,9 @@ func get_initial_fuel():
 
 func on_fuel_depleted():
 	pass
+	
+func on_heat_incremented(heat):
+	pass
 
 func get_directions():
 	return [
@@ -54,6 +57,7 @@ func _on_area_entered(entity):
 
 	if layer_name == "flame":
 		heat += 1
+		on_heat_incremented(heat)
 		
 func _on_BurnTimer_timeout():
 	if heat > flash_point and fuel > 0:
