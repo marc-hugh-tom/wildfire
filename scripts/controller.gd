@@ -3,9 +3,9 @@ extends Node2D
 onready var tilemap = $TileMap_below
 onready var tileset = tilemap.tile_set
 
-const CAMPFIRE = preload("res://campfire.tscn")
-const TREE = preload("res://tree.tscn")
-const TREEHOUSE = preload("res://treehouse.tscn")
+const CAMPFIRE = preload("res://nodes/campfire.tscn")
+const TREE = preload("res://nodes/tree.tscn")
+const TREEHOUSE = preload("res://nodes/treehouse.tscn")
 
 var scenes_by_tile_name = {
 	"campfire": CAMPFIRE,

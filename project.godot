@@ -8,20 +8,15 @@
 
 config_version=4
 
-_global_script_classes=[ {
-"base": "Node",
-"class": "FireStateMachine",
-"language": "GDScript",
-"path": "res://fire_state_machine.gd"
-} ]
+_global_script_classes=[  ]
 _global_script_class_icons={
-"FireStateMachine": ""
+
 }
 
 [application]
 
 config/name="fire"
-run/main_scene="res://main.tscn"
+run/main_scene="res://nodes/main.tscn"
 config/icon="res://icon.png"
 
 [debug]
