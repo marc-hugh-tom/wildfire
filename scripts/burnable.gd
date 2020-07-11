@@ -1,6 +1,6 @@
 extends "res://scripts/placeable.gd"
 
-const FLAME = preload("res://nodes/burnable/flame.tscn")
+const FLAME = preload("res://nodes/flame.tscn")
 
 var heat
 var flash_point

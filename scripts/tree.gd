@@ -1,29 +1,24 @@
-extends Node2D
+extends "res://scripts/burnable.gd"
 
-onready var fsm = $fire_state_machine
+onready var burnt_tree_texture = preload("res://assets/burnt_tree.png")
 
-onready var on_fire_start_texture = preload("res://assets/tree_fire_start.png")
-onready var on_fire_spread_texture = preload("res://assets/tree_fire_full.png")
+func get_initial_heat():
+	return 0
+	
+func get_initial_flash_point():
+	return 3
+	
+func get_initial_fuel():
+	return 5
 
-var pos
+func on_fuel_depleted():
+	$Sprite.set_texture(burnt_tree_texture)
 
-var neighbour_fire_count = 0
-var neighbour_fire_threshold = 4
+func get_placeable_name():
+	return "tree"
 
-func _ready():
-	fsm.connect("on_fire", self, "_on_fire")
-	fsm.connect("spread", self, "_on_spread")
+func get_cost():
+	return 1
 
-func init(coord):
-	pos = coord
-
-func _spread_callback(neighbour):
-	neighbour_fire_count += 1
-	if neighbour_fire_count >= neighbour_fire_threshold:
-		fsm._on_fire_spread()
-
-func _on_fire():
-	$Sprite.set_texture(on_fire_start_texture)
-
-func _on_spread():
-	$Sprite.set_texture(on_fire_spread_texture)
+func get_description():
+	return "a tree"
