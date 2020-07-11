@@ -18,6 +18,8 @@ func get_cost():
 func get_description():
 	return "A carelessly discarded cigarette."
 
+func get_icon():
+	return(load("res://assets/cigarette/cigarette1.png"))
 
 func get_directions():
 	return [

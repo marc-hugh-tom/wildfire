@@ -22,3 +22,6 @@ func get_cost():
 
 func get_description():
 	return "a dry tree"
+
+func get_icon():
+	return(load("res://assets/dry_trees.png"))

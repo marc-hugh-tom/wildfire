@@ -134,12 +134,13 @@ func init_item_buttons(item_dict):
 	for child in $hud.get_node("background/item_buttons").get_children():
 		child.queue_free()
 	for item_name in item_dict:
+		var item_instance = item_dict[item_name].instance()
 		var button = Button.new()
 		button.set_text(item_name)
+		button.set_button_icon(item_instance.get_icon())
 		button.connect("button_up", self, "item_swap_callback",
 			[item_name])
 		$hud.get_node("background/item_buttons").add_child(button)
-		var item_instance = item_dict[item_name].instance()
 		item_button_dict[item_instance.get_placeable_name()] = {
 			"button": button,
 			"cost": item_instance.get_cost()
