@@ -37,6 +37,7 @@ func connect_ui_buttons():
 		"button_up", self, "undo")
 
 func add_level(level):
+	hide_messages()
 	if not current_level == null:
 		current_level.queue_free()
 	current_level = level.instance()
@@ -48,13 +49,30 @@ func add_level(level):
 	get_tree().set_pause(true)
 	current_money = current_level.starting_money
 	update_money()
+	init_timer(current_level.starting_time)
+	init_next_level_button()
+
+func hide_messages():
+	$hud/time_message.set_visible(false)
+	$hud/lose_message.set_visible(false)
+	$hud/win_message.set_visible(false)
 
 func completely_reset_level():
 	action_list = []
 	add_level(packaged_current_level)
 
 func on_treehouse_burnt():
-	print("on treehouse burnt")
+	$Timer.set_paused(true)
+	$hud/background/reset_buttons/reset.set_disabled(false)
+	$hud/lose_message.set_visible(true)
+
+func on_success():
+	$Timer.set_paused(true)
+	$hud/background/reset_buttons/reset.set_disabled(false)
+	$hud/win_message.set_visible(true)
+
+func init_next_level_button():
+	pass #TODO
 
 func init_placement_cursor():
 	placement_cursor = Sprite.new()
@@ -75,7 +93,8 @@ func _input(event):
 
 # Tests if a position is on the map. If false, it's on the UI
 func world_position_on_map(world_position):
-	return(not $hud.get_node("background").get_rect().has_point(world_position))
+	return(not $hud.get_node("background").get_rect().has_point(world_position)
+		and not $hud.get_node("timer").get_rect().has_point(world_position))
 
 func update_placement_cursor(event_position):
 	if world_position_on_map(event_position):
@@ -120,9 +139,14 @@ func apply_item(item, world_position):
 func start_stop():
 	if get_tree().is_paused():
 		disable_item_buttons()
+		$hud/background/simulation_buttons/undo.set_disabled(true)
+		$hud/background/reset_buttons/reset.set_disabled(true)
 		get_tree().set_pause(false)
+		$Timer.start()
 	else:
 		get_tree().set_pause(true)
+		$hud/background/simulation_buttons/undo.set_disabled(false)
+		$hud/background/reset_buttons/reset.set_disabled(false)
 		reset_level_and_apply_action_list()
 	swap_play_stop_button()
 
@@ -176,3 +200,22 @@ func swap_play_stop_button():
 	if current_text == "Stop":
 		button.set_text("Play")
 		button.set_button_icon(load("res://assets/ui/play_icon.png"))
+
+func init_timer(time):
+	var timer = Timer.new()
+	timer.name = "Timer"
+	timer.set_wait_time(time)
+	timer.set_one_shot(true)
+	add_child(timer)
+	timer.connect("timeout", self, "on_timer_runout")
+	$hud/timer/container/time_text.set_text("%2.2f" % time)
+
+func _process(delta):
+	if has_node("Timer"):
+		if not get_tree().is_paused():
+			$hud/timer/container/time_text.set_text("%2.2f" % $Timer.get_time_left())
+
+func on_timer_runout():
+	$hud/timer/container/time_text.set_text("%2.2f" % 0)
+	$hud/background/reset_buttons/reset.set_disabled(false)
+	$hud/time_message.set_visible(true)
