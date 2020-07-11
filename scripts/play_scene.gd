@@ -3,7 +3,7 @@ extends Node2D
 signal quit
 
 # DEBUG
-const debug_level = preload("res://nodes/main.tscn")
+const debug_level = preload("res://nodes/level_1.tscn")
 
 var packaged_current_level = debug_level
 var current_level

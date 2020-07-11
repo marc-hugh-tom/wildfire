@@ -66,7 +66,7 @@ __meta__ = {
 }
 
 [node name="start_stop" type="Button" parent="hud/background/simulation_buttons"]
-margin_right = 114.0
+margin_right = 98.0
 margin_bottom = 86.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -75,7 +75,7 @@ text = "Play"
 icon = ExtResource( 5 )
 
 [node name="undo" type="Button" parent="hud/background/simulation_buttons"]
-margin_left = 118.0
+margin_left = 102.0
 margin_right = 190.0
 margin_bottom = 86.0
 size_flags_horizontal = 3

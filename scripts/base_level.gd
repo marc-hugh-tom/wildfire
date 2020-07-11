@@ -26,14 +26,30 @@ var scenes_by_tile_name = {
 	"cigarette": CIGARETTE
 }
 
-var items = {
+var all_items = {
 	"Plant Killer": PLANT_KILLER,
 	"Cigarette": CIGARETTE,
 	"Petrol Can": PETROL_CAN,
 	"Ice cube": ICE_BLOCK
 }
 
-var starting_money = 10
+var items = init_items()
+
+func init_items():
+	var ret = {}
+	var available_items = get_available_items()
+	for item in all_items.keys():
+		if available_items.has(item):
+			ret[item] = all_items[item]
+	return ret
+
+var starting_money = get_start_money()
+
+func get_start_money():
+	assert(false)
+
+func get_available_items():
+	assert(false)
 
 func _ready():
 	tilemap.set_visible(false)
