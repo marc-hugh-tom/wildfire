@@ -11,6 +11,8 @@ const DRY_TREE = preload("res://nodes/dry_trees.tscn")
 const TREEHOUSE = preload("res://nodes/treehouse.tscn")
 
 const PLANT_KILLER = preload("res://nodes/plantkiller.tscn")
+const CIGARETTE = preload("res://nodes/cigarette.tscn")
+const PETROL_CAN = preload("res://nodes/petrol.tscn")
 
 var scenes_by_tile_name = {
 	"campfire": CAMPFIRE,
@@ -20,7 +22,9 @@ var scenes_by_tile_name = {
 }
 
 var items = {
-	"Plant Killer": PLANT_KILLER
+	"Plant Killer": PLANT_KILLER,
+	"Cigarette": CIGARETTE,
+	"Petrol Can": PETROL_CAN
 }
 
 var grid = []
@@ -70,3 +74,27 @@ func plantkiller_application(world_position):
 					var dry_tree = DRY_TREE.instance()
 					dry_tree.set_position(child_position)
 					add_child(dry_tree)
+
+func cigarette_validity(world_position):
+	for child in get_children():
+		if child.has_method("get_placeable_name"):
+			if tilemap.world_to_map(child.position) == tilemap.world_to_map(world_position):
+				return(false)
+	return(true)
+
+func cigarette_application(world_position):
+	var cigarette = CIGARETTE.instance()
+	cigarette.set_position(tilemap.map_to_world(tilemap.world_to_map(world_position)))
+	add_child(cigarette)
+
+func petrol_validity(world_position):
+	for child in get_children():
+		if child.has_method("get_placeable_name"):
+			if tilemap.world_to_map(child.position) == tilemap.world_to_map(world_position):
+				return(false)
+	return(true)
+
+func petrol_application(world_position):
+	var petrol = PETROL_CAN.instance()
+	petrol.set_position(tilemap.map_to_world(tilemap.world_to_map(world_position)))
+	add_child(petrol)

@@ -76,6 +76,8 @@ func toggle_pause():
 	get_tree().set_pause(!get_tree().is_paused())
 
 func init_item_buttons(item_dict):
+	for child in $hud.get_node("background/item_buttons").get_children():
+		child.queue_free()
 	for item_name in item_dict:
 		var button = Button.new()
 		button.set_text(item_name)
