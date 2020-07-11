@@ -1,10 +1,14 @@
 extends "res://scripts/placeable.gd"
 
 const FLAME = preload("res://nodes/flame.tscn")
+const FIRE = preload("res://nodes/fire.tscn")
 
 var heat
 var flash_point
 var fuel
+
+var fire: AnimatedSprite
+var fire_scale = Vector2.ZERO
 
 func _ready():
 	if $Area2D != null:
@@ -34,7 +38,11 @@ func on_fuel_depleted():
 	
 func on_heat_incremented(heat):
 	pass
-
+	
+func on_ignition():
+	fire = FIRE.instance()
+	add_child(fire)
+	
 func get_directions():
 	return [
 		Vector2(-1, 0),
@@ -56,9 +64,24 @@ func _on_area_entered(entity):
 		str("layer_names/2d_physics/layer_", collision_layer))
 
 	if layer_name == "flame":
-		heat += 1
+		heat = min(heat+1, 8)
 		if fuel > 0:
 			on_heat_incremented(heat)
+
+func _process(delta):
+	if heat > 0 and fuel > 0:
+		if fire == null:
+			fire = FIRE.instance()
+			fire.position = Vector2(16, 8)
+			add_child(fire)
+	
+	if fire != null:
+		var scale_factor = clamp(heat / 2, 0.3, 1.75)
+		var new_fire_scale = Vector2(scale_factor, scale_factor)
+		fire_scale = lerp(fire_scale, new_fire_scale, delta)
+		fire.set_scale(fire_scale)
+		if heat <= 0 and fire_scale.x <= 0.4:
+			fire.queue_free()
 
 func _on_BurnTimer_timeout():
 	if heat > flash_point and fuel > 0:
@@ -66,9 +89,14 @@ func _on_BurnTimer_timeout():
 
 		for direction in directions:
 			var flame = FLAME.instance()
+			flame.set_position(Vector2(16,16))
 			flame.set_direction(direction)
 			add_child(flame)
 
 		fuel -= 1
+		heat = min(heat+1, 8)
 	elif fuel <= 0:
 		on_fuel_depleted()
+		
+	if heat > 0:
+		heat -= 0.5

@@ -1,8 +1,6 @@
 extends "res://scripts/burnable.gd"
 
 onready var burnt_tree_texture = preload("res://assets/burnt_tree.png")
-onready var tree_fire_start_texture = preload("res://assets/tree_fire_start.png")
-onready var tree_fire_full_texture = preload("res://assets/tree_fire_full.png")
 
 func get_initial_heat():
 	return 0
@@ -14,6 +12,7 @@ func get_initial_fuel():
 	return 5
 
 func on_fuel_depleted():
+	.on_fuel_depleted()
 	$Sprite.set_texture(burnt_tree_texture)
 
 func get_placeable_name():
@@ -27,9 +26,3 @@ func get_description():
 
 func get_icon():
 	return(load("res://assets/tree.png"))
-
-func on_heat_incremented(heat):
-	if heat == 1:
-		$Sprite.set_texture(tree_fire_start_texture)
-	elif heat >= 3:
-		$Sprite.set_texture(tree_fire_full_texture)
