@@ -7,6 +7,8 @@ const CAMPFIRE = preload("res://nodes/campfire.tscn")
 const TREE = preload("res://nodes/tree.tscn")
 const DRY_TREE = preload("res://nodes/dry_trees.tscn")
 
+const PLANT_KILLER = preload("res://nodes/plantkiller.tscn")
+
 var scenes_by_tile_name = {
 	"campfire": CAMPFIRE,
 	"tree": TREE,
@@ -38,3 +40,9 @@ func coord_to_index(rect, coord):
 	var offset = rect.position
 	coord -= offset
 	return coord.x + (rect.size.x * coord.y)
+
+func plantkiller_validity(world_position):
+	var entity = entities[get_entity_index(world_position)]
+	if entity:
+		return(entity.object_type == "tree")
+	return(false)

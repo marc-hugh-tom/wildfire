@@ -9,10 +9,13 @@ var current_level
 var placement_cursor
 var valid_cursor = preload("res://assets/ui/valid_position.png")
 
+var current_item
+
 func _ready():
 	connect_ui_buttons()
 	add_level(debug_level)
 	display_placement_cursor()
+	DEBUG()
 
 func connect_ui_buttons():
 	$hud.get_node("background/reset_buttons/menu").connect(
@@ -35,3 +38,11 @@ func _input(event):
 		var snapped_position = tilemap.map_to_world(
 			tilemap.world_to_map(event.position))
 		placement_cursor.set_position(snapped_position)
+		validity_test(event.position)
+
+func validity_test(world_position):
+	print(current_level.callv(current_item.name + "_validity", [world_position]))
+
+func DEBUG():
+	var plantkiller = preload("res://nodes/plantkiller.tscn")
+	current_item = plantkiller.instance()
