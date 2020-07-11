@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://assets/firework.png" type="Texture" id=1]
+[ext_resource path="res://scripts/firework.gd" type="Script" id=2]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 9.72199
+
+[sub_resource type="ParticlesMaterial" id=2]
+lifetime_randomness = 0.6
+emission_shape = 1
+emission_sphere_radius = 1.2
+flag_disable_z = true
+spread = 180.0
+gravity = Vector3( -98, 0, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+color = Color( 1, 0.921569, 0.286275, 1 )
+
+[node name="firework" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+centered = false
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( 20, 16 )
+shape = SubResource( 1 )
+
+[node name="Particles2D" type="Particles2D" parent="."]
+position = Vector2( 2.06017, 16.3877 )
+process_material = SubResource( 2 )

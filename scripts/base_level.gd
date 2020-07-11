@@ -16,6 +16,7 @@ const CIGARETTE = preload("res://nodes/cigarette.tscn")
 const PETROL_CAN = preload("res://nodes/petrol.tscn")
 
 const ICE_BLOCK = preload("res://nodes/ice_block.tscn")
+const FIREWORK = preload("res://nodes/firework.tscn")
 
 var scenes_by_tile_name = {
 	"campfire": CAMPFIRE,
@@ -24,14 +25,16 @@ var scenes_by_tile_name = {
 	"treehouse": TREEHOUSE,
 	"icecube": ICE_BLOCK,
 	"petrol": PETROL_CAN,
-	"cigarette": CIGARETTE
+	"cigarette": CIGARETTE,
+	"firework": FIREWORK
 }
 
 var all_items = {
 	"Plant Killer": PLANT_KILLER,
 	"Cigarette": CIGARETTE,
 	"Petrol Can": PETROL_CAN,
-	"Ice cube": ICE_BLOCK
+	"Ice cube": ICE_BLOCK,
+	"Firework": FIREWORK,
 }
 
 func init_items():
@@ -141,4 +144,16 @@ func ice_block_application(world_position):
 	ice.connect("play_sound", self, "play_sound")
 	ice.set_position(tilemap.map_to_world(tilemap.world_to_map(world_position)))
 	add_child(ice)
+
+func firework_validity(world_position):
+	for child in get_children():
+		if child.has_method("get_placeable_name"):
+			if tilemap.world_to_map(child.position) == tilemap.world_to_map(world_position):
+				return(false)
+	return(true)
+
+func firework_application(world_position):
+	var petrol = FIREWORK.instance()
+	petrol.set_position(tilemap.map_to_world(tilemap.world_to_map(world_position)))
+	add_child(petrol)
 

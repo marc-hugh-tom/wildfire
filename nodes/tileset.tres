@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=8 format=2]
+[gd_resource type="TileSet" load_steps=9 format=2]
 
 [ext_resource path="res://assets/treehouse.png" type="Texture" id=1]
 [ext_resource path="res://assets/tree.png" type="Texture" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://assets/dry_trees.png" type="Texture" id=5]
 [ext_resource path="res://assets/petrol.png" type="Texture" id=6]
 [ext_resource path="res://assets/cigarette/cigarette1.png" type="Texture" id=7]
+[ext_resource path="res://assets/firework.png" type="Texture" id=8]
 
 [resource]
 0/name = "tree"
@@ -116,3 +117,17 @@
 7/shape_one_way_margin = 0.0
 7/shapes = [  ]
 7/z_index = 0
+8/name = "firework"
+8/texture = ExtResource( 8 )
+8/tex_offset = Vector2( 0, 0 )
+8/modulate = Color( 1, 1, 1, 1 )
+8/region = Rect2( 0, 0, 32, 32 )
+8/tile_mode = 0
+8/occluder_offset = Vector2( 0, 0 )
+8/navigation_offset = Vector2( 0, 0 )
+8/shape_offset = Vector2( 0, 0 )
+8/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+8/shape_one_way = false
+8/shape_one_way_margin = 0.0
+8/shapes = [  ]
+8/z_index = 0
