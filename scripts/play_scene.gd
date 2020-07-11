@@ -42,14 +42,14 @@ func add_level(level):
 		current_level.queue_free()
 	current_level = level.instance()
 	current_level.connect("treehouse_burnt", self, "on_treehouse_burnt")
-	init_item_buttons(current_level.items)
+	init_item_buttons(current_level.init_items())
 	add_child(current_level)
 	move_child(current_level, 0)
 	current_level.set_pause_mode(PAUSE_MODE_STOP)
 	get_tree().set_pause(true)
-	current_money = current_level.starting_money
+	current_money = current_level.get_start_money()
 	update_money()
-	init_timer(current_level.starting_time)
+	init_timer(current_level.get_start_time_seconds())
 	init_next_level_button()
 
 func hide_messages():
@@ -142,6 +142,7 @@ func start_stop():
 		$hud/background/simulation_buttons/undo.set_disabled(true)
 		$hud/background/reset_buttons/reset.set_disabled(true)
 		get_tree().set_pause(false)
+		$Timer.set_paused(false)
 		$Timer.start()
 	else:
 		get_tree().set_pause(true)
@@ -172,7 +173,7 @@ func init_item_buttons(item_dict):
 		}
 
 func item_swap_callback(item_name):
-	current_item = current_level.items[item_name].instance()
+	current_item = current_level.init_items()[item_name].instance()
 
 func update_money():
 	$hud.get_node("money").set_text("£" + str(current_money))
