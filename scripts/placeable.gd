@@ -8,3 +8,6 @@ func get_cost():
 	
 func get_description():
 	assert(false)
+
+func get_icon():
+	assert(false)

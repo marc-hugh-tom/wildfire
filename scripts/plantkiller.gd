@@ -8,3 +8,6 @@ func get_cost():
 	
 func get_description():
 	return("Kills trees, making them more flammable.")
+
+func get_icon():
+	return(load("res://assets/plant_killer.png"))

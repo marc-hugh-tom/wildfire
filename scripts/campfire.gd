@@ -17,3 +17,6 @@ func get_cost():
 
 func get_description():
 	return "a campfire"
+
+func get_icon():
+	return(load("res://assets/campfire.png"))

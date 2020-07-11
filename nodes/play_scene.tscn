@@ -1,7 +1,14 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scripts/play_scene.gd" type="Script" id=1]
 [ext_resource path="res://assets/ui/hud.png" type="Texture" id=2]
+[ext_resource path="res://assets/fonts/VCR_OSD_MONO_1.001.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://assets/fonts/button_font.tres" type="DynamicFont" id=4]
+[ext_resource path="res://assets/ui/play_icon.png" type="Texture" id=5]
+
+[sub_resource type="DynamicFont" id=1]
+size = 48
+font_data = ExtResource( 3 )
 
 [node name="play_scene" type="Node2D"]
 script = ExtResource( 1 )
@@ -37,6 +44,7 @@ margin_right = 86.0
 margin_bottom = 41.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+custom_fonts/font = ExtResource( 4 )
 text = "Menu"
 
 [node name="reset" type="Button" parent="hud/background/reset_buttons"]
@@ -45,7 +53,8 @@ margin_right = 86.0
 margin_bottom = 86.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-text = "Reset level"
+custom_fonts/font = ExtResource( 4 )
+text = "Reset"
 
 [node name="simulation_buttons" type="HBoxContainer" parent="hud/background"]
 margin_left = 109.0
@@ -57,18 +66,21 @@ __meta__ = {
 }
 
 [node name="start_stop" type="Button" parent="hud/background/simulation_buttons"]
-margin_right = 93.0
+margin_right = 114.0
 margin_bottom = 86.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-text = "Start / Stop"
+custom_fonts/font = ExtResource( 4 )
+text = "Play"
+icon = ExtResource( 5 )
 
 [node name="undo" type="Button" parent="hud/background/simulation_buttons"]
-margin_left = 97.0
+margin_left = 118.0
 margin_right = 190.0
 margin_bottom = 86.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+custom_fonts/font = ExtResource( 4 )
 text = "Undo"
 
 [node name="item_buttons" type="HBoxContainer" parent="hud/background"]
@@ -76,6 +88,20 @@ margin_left = 317.0
 margin_top = 5.0
 margin_right = 915.0
 margin_bottom = 91.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="money" type="Label" parent="hud"]
+margin_left = 928.0
+margin_top = 480.0
+margin_right = 1024.0
+margin_bottom = 576.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "£10"
+align = 1
+valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }

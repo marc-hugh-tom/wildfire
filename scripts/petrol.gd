@@ -23,6 +23,8 @@ func get_cost():
 func get_description():
 	return "I'm gonna be honest with you, it smells like pure gasoline."
 
+func get_icon():
+	return(load("res://assets/petrol.png"))
 
 func get_directions():
 	return [
