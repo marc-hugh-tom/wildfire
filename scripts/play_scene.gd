@@ -191,6 +191,7 @@ func update_item_buttons():
 			item_button_dict[item_name]["button"].set_disabled(false)
 
 func disable_item_buttons():
+	current_item = null
 	for item_name in item_button_dict:
 		item_button_dict[item_name]["button"].set_disabled(true)
 
