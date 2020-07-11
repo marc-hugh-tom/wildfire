@@ -5,11 +5,13 @@ onready var tileset = tilemap.tile_set
 
 const CAMPFIRE = preload("res://nodes/campfire.tscn")
 const TREE = preload("res://nodes/tree.tscn")
+const DRYTREES = preload("res://nodes/dry_trees.tscn")
 const TREEHOUSE = preload("res://nodes/treehouse.tscn")
 
 var scenes_by_tile_name = {
 	"campfire": CAMPFIRE,
 	"tree": TREE,
+	"dry_trees": DRYTREES,
 	"treehouse": TREEHOUSE
 }
 

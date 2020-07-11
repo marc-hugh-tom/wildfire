@@ -2,13 +2,10 @@ extends Node2D
 
 onready var fsm = $fire_state_machine
 
-onready var on_fire_start_texture = preload("res://assets/tree_fire_start.png")
-onready var on_fire_spread_texture = preload("res://assets/tree_fire_full.png")
+onready var on_fire_start_texture = preload("res://assets/dry_trees_fire_start.png")
+onready var on_fire_spread_texture = preload("res://assets/dry_trees_fire_full.png")
 
 var pos
-
-var neighbour_fire_count = 0
-var neighbour_fire_threshold = 2
 
 func _ready():
 	fsm.connect("on_fire", self, "_on_fire")
@@ -18,9 +15,7 @@ func init(coord):
 	pos = coord
 
 func _spread_callback(neighbour):
-	neighbour_fire_count += 1
-	if neighbour_fire_count >= neighbour_fire_threshold:
-		fsm._on_fire_spread()
+	fsm._on_fire_spread()
 
 func _on_fire():
 	$Sprite.set_texture(on_fire_start_texture)
