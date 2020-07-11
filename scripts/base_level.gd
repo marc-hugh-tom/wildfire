@@ -35,8 +35,6 @@ var all_items = {
 	"Ice cube": ICE_BLOCK
 }
 
-var items = init_items()
-
 func init_items():
 	var ret = {}
 	var available_items = get_available_items()
@@ -45,12 +43,16 @@ func init_items():
 			ret[item] = all_items[item]
 	return ret
 
-var starting_money = get_start_money()
-
 func get_start_money():
 	assert(false)
 
 func get_available_items():
+	assert(false)
+
+func get_start_time_seconds():
+	assert(false)
+
+func get_next_level():
 	assert(false)
 
 func _ready():

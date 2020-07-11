@@ -15,6 +15,7 @@ func get_placeable_name():
 	return "petrol"
 	
 func on_fuel_depleted():
+	.on_fuel_depleted()
 	$Sprite.set_texture(destroyed_petrol_texture)
 
 func get_cost():
