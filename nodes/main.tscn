@@ -1,12 +1,22 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://nodes/tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://scripts/controller.gd" type="Script" id=2]
 [ext_resource path="res://nodes/cigarette.tscn" type="PackedScene" id=3]
 [ext_resource path="res://nodes/petrol.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/soil.png" type="Texture" id=5]
 
 [node name="main" type="Node2D"]
 script = ExtResource( 2 )
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_right = 1024.0
+margin_bottom = 576.0
+texture = ExtResource( 5 )
+stretch_mode = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource( 1 )
