@@ -57,8 +57,9 @@ func _on_area_entered(entity):
 
 	if layer_name == "flame":
 		heat += 1
-		on_heat_incremented(heat)
-		
+		if fuel > 0:
+			on_heat_incremented(heat)
+
 func _on_BurnTimer_timeout():
 	if heat > flash_point and fuel > 0:
 		var directions = get_directions()
