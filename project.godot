@@ -30,6 +30,8 @@ window/size/height=576
 [layer_names]
 
 2d_physics/layer_1="flame"
+2d_physics/layer_2="tree"
+2d_physics/layer_4="ice"
 
 [rendering]
 
