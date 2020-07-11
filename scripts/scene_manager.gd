@@ -6,6 +6,7 @@ const menu_scene = preload("res://nodes/menu_scene.tscn")
 const scene_transition = preload("res://nodes/scene_transition.tscn")
 
 func _ready():
+	set_pause_mode(PAUSE_MODE_PROCESS)
 	var transition = scene_transition.instance()
 	transition.set_to_black()
 	add_child(transition)
