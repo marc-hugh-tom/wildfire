@@ -19,6 +19,10 @@ config/name="fire"
 run/main_scene="res://main.tscn"
 config/icon="res://icon.png"
 
+[debug]
+
+settings/stdout/verbose_stdout=true
+
 [rendering]
 
 environment/default_environment="res://default_env.tres"
