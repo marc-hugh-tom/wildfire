@@ -70,3 +70,12 @@ margin_bottom = 86.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "Undo"
+
+[node name="item_buttons" type="HBoxContainer" parent="hud/background"]
+margin_left = 317.0
+margin_top = 5.0
+margin_right = 915.0
+margin_bottom = 91.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
