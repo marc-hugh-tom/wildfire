@@ -41,7 +41,7 @@ func _input(event):
 		validity_test(event.position)
 
 func validity_test(world_position):
-	print(current_level.callv(current_item.name + "_validity", [world_position]))
+	print(current_level.callv(current_item.get_placeable_name() + "_validity", [world_position]))
 
 func DEBUG():
 	var plantkiller = preload("res://nodes/plantkiller.tscn")
