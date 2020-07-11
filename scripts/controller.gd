@@ -28,7 +28,7 @@ var grid = []
 func _ready():
 	tilemap.set_visible(false)
 	init_entities()
-	
+
 func init_entities():
 	var rect = tilemap.get_used_rect()
 	grid.resize(rect.get_area())
@@ -53,4 +53,9 @@ func coord_to_index(rect, coord):
 	return coord.x + (rect.size.x * coord.y)
 
 func plantkiller_validity(world_position):
+	for child in get_children():
+		if child.has_method("get_placeable_name"):
+			if child.get_placeable_name() == "tree":
+				if tilemap.world_to_map(child.position) == tilemap.world_to_map(world_position):
+					return(true)
 	return(false)

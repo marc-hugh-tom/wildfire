@@ -13,19 +13,28 @@ var current_item
 
 func _ready():
 	connect_ui_buttons()
+	set_pause_mode(PAUSE_MODE_PROCESS)
 	add_level(debug_level)
 	display_placement_cursor()
-	DEBUG()
 
 func connect_ui_buttons():
 	$hud.get_node("background/reset_buttons/menu").connect(
 		"button_up", self, "emit_signal", ["quit"])
+	$hud.get_node("background/reset_buttons/reset").connect(
+		"button_up", self, "add_level", [debug_level])
+	$hud.get_node("background/simulation_buttons/start_stop").connect(
+		"button_up", self, "toggle_pause")
 
 func add_level(level):
+	print('willy')
+	if not current_level == null:
+		current_level.queue_free()
 	current_level = level.instance()
 	current_level.connect("treehouse_burnt", self, "on_treehouse_burnt")
 	add_child(current_level)
 	move_child(current_level, 0)
+	current_level.set_pause_mode(PAUSE_MODE_STOP)
+	get_tree().set_pause(true)
 	
 func on_treehouse_burnt():
 	print("on treehouse burnt")
@@ -47,6 +56,5 @@ func _input(event):
 func validity_test(world_position):
 	print(current_level.callv(current_item.get_placeable_name() + "_validity", [world_position]))
 
-func DEBUG():
-	var plantkiller = preload("res://nodes/plantkiller.tscn")
-	current_item = plantkiller.instance()
+func toggle_pause():
+	get_tree().set_pause(!get_tree().is_paused())
