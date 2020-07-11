@@ -2,8 +2,10 @@ extends Node2D
 
 signal quit
 
+# DEBUG
 const debug_level = preload("res://nodes/main.tscn")
 
+var packaged_current_level = debug_level
 var current_level
 
 var placement_cursor
@@ -12,19 +14,23 @@ var invalid_cursor = preload("res://assets/ui/invalid_position.png")
 
 var current_item
 
+var action_list = []
+
 func _ready():
 	connect_ui_buttons()
 	set_pause_mode(PAUSE_MODE_PROCESS)
-	add_level(debug_level)
-	display_placement_cursor()
+	add_level(packaged_current_level)
+	init_placement_cursor()
 
 func connect_ui_buttons():
 	$hud.get_node("background/reset_buttons/menu").connect(
 		"button_up", self, "emit_signal", ["quit"])
 	$hud.get_node("background/reset_buttons/reset").connect(
-		"button_up", self, "add_level", [debug_level])
+		"button_up", self, "completely_reset_level")
 	$hud.get_node("background/simulation_buttons/start_stop").connect(
-		"button_up", self, "toggle_pause")
+		"button_up", self, "start_stop")
+	$hud.get_node("background/simulation_buttons/undo").connect(
+		"button_up", self, "undo")
 
 func add_level(level):
 	if not current_level == null:
@@ -36,44 +42,77 @@ func add_level(level):
 	move_child(current_level, 0)
 	current_level.set_pause_mode(PAUSE_MODE_STOP)
 	get_tree().set_pause(true)
-	
+
+func completely_reset_level():
+	action_list = []
+	add_level(packaged_current_level)
+
 func on_treehouse_burnt():
 	print("on treehouse burnt")
 
-func display_placement_cursor():
+func init_placement_cursor():
 	placement_cursor = Sprite.new()
 	placement_cursor.set_centered(false)
 	placement_cursor.texture = valid_cursor
+	placement_cursor.set_visible(false)
 	add_child(placement_cursor)
 
 func _input(event):
 	if event is InputEventMouseMotion:
-		if current_item:
-			update_placement_cursor(event.position)
+		update_placement_cursor(event.position)
 	if event is InputEventMouseButton:
 		if not event.is_pressed():
-			if current_item:
-				if validity_test(event.position):
-					apply_item(event.position)
+			if world_position_on_map(event.position):
+				if current_item:
+					if validity_test(event.position):
+						apply_item(event.position)
+
+# Tests if a position is on the map. If false, it's on the UI
+func world_position_on_map(world_position):
+	return(not $hud.get_node("background").get_rect().has_point(world_position))
 
 func update_placement_cursor(event_position):
-	var tilemap = current_level.get_node("TileMap")
-	var snapped_position = tilemap.map_to_world(
-		tilemap.world_to_map(event_position))
-	placement_cursor.set_position(snapped_position)
-	if validity_test(event_position):
-		placement_cursor.texture = valid_cursor
+	if world_position_on_map(event_position):
+		if current_item:
+			var tilemap = current_level.get_node("TileMap")
+			var snapped_position = tilemap.map_to_world(
+				tilemap.world_to_map(event_position))
+			placement_cursor.set_position(snapped_position)
+			placement_cursor.set_visible(true)
+			if validity_test(event_position):
+				placement_cursor.texture = valid_cursor
+			else:
+				placement_cursor.texture = invalid_cursor
 	else:
-		placement_cursor.texture = invalid_cursor
+		placement_cursor.set_visible(false)
 
 func validity_test(world_position):
 	return(current_level.callv(current_item.get_placeable_name() + "_validity", [world_position]))
 
 func apply_item(world_position):
-	return(current_level.callv(current_item.get_placeable_name() + "_application", [world_position]))
+	action_list.append(
+		{
+			"item": current_item.get_placeable_name(),
+			"position": world_position
+		}
+	)
+	current_level.callv(current_item.get_placeable_name() + "_application", [world_position])
 
-func toggle_pause():
-	get_tree().set_pause(!get_tree().is_paused())
+func reset_level_and_apply_action_list():
+	add_level(packaged_current_level)
+	for action in action_list:
+		current_level.callv(action["item"] + "_application", [action["position"]])
+
+func start_stop():
+	if get_tree().is_paused():
+		get_tree().set_pause(false)
+	else:
+		get_tree().set_pause(true)
+		reset_level_and_apply_action_list()
+
+func undo():
+	action_list.pop_back()
+	reset_level_and_apply_action_list()
 
 func init_item_buttons(item_dict):
 	for child in $hud.get_node("background/item_buttons").get_children():
