@@ -16,7 +16,7 @@ _global_script_class_icons={
 [application]
 
 config/name="fire"
-run/main_scene="res://nodes/main.tscn"
+run/main_scene="res://nodes/scene_manager.tscn"
 config/icon="res://icon.png"
 
 [debug]
