@@ -1,4 +1,4 @@
-extends Node2D
+extends "res://scripts/placeable.gd"
 
 const FLAME = preload("res://nodes/burnable/flame.tscn")
 
@@ -28,6 +28,9 @@ func get_initial_flash_point():
 	
 func get_initial_fuel():
 	return 5
+
+func on_fuel_depleted():
+	pass
 
 func get_directions():
 	return [
@@ -63,5 +66,4 @@ func _on_BurnTimer_timeout():
 
 		fuel -= 1
 	elif fuel <= 0:
-		# change sprite
-		pass
+		on_fuel_depleted()

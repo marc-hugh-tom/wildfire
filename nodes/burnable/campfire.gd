@@ -8,3 +8,12 @@ func get_initial_flash_point():
 	
 func get_initial_fuel():
 	return 20
+
+func get_placeable_name():
+	return "campfire"
+
+func get_cost():
+	return 1
+
+func get_description():
+	return "a campfire"
