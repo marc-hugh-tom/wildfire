@@ -43,7 +43,7 @@ func init_entities():
 			var instance = scene.instance()
 			add_child(instance)
 			instance.set_position(tilemap.map_to_world(coord))
-			
+
 			if tile_name == "treehouse":
 				instance.connect("treehouse_burnt", self, "emit_signal", ["treehouse_burnt"])
 
