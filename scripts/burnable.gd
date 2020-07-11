@@ -10,6 +10,8 @@ var fuel
 var fire: AnimatedSprite
 var fire_scale = Vector2.ZERO
 
+var exploded = false
+
 func _ready():
 	if $Area2D != null:
 		$Area2D.connect("area_entered", self, "_on_area_entered")
@@ -26,23 +28,24 @@ func _ready():
 
 func get_initial_heat():
 	return 0
-	
+
 func get_initial_flash_point():
 	return 3
-	
+
 func get_initial_fuel():
 	return 5
 
 func on_fuel_depleted():
 	pass
-	
+
 func on_heat_incremented(heat):
 	pass
-	
+
 func on_ignition():
 	fire = FIRE.instance()
+	fire.position = Vector2(16, 8)
 	add_child(fire)
-	
+
 func get_directions():
 	return [
 		Vector2(-1, 0),
@@ -71,10 +74,8 @@ func _on_area_entered(entity):
 func _process(delta):
 	if heat > 0 and fuel > 0:
 		if fire == null:
-			fire = FIRE.instance()
-			fire.position = Vector2(16, 8)
-			add_child(fire)
-	
+			on_ignition()
+
 	if fire != null:
 		var scale_factor = clamp(heat / 2, 0.3, 1.75)
 		var new_fire_scale = Vector2(scale_factor, scale_factor)
@@ -83,20 +84,22 @@ func _process(delta):
 		if heat <= 0 and fire_scale.x <= 0.4:
 			fire.queue_free()
 
+func pump_out_fire():
+	if not exploded:
+		exploded = true
+	var directions = get_directions()
+	for direction in directions:
+		var flame = FLAME.instance()
+		flame.set_position(Vector2(16,16))
+		flame.set_direction(direction)
+		add_child(flame)
+	fuel -= 1
+	heat = min(heat+1, 8)
+
 func _on_BurnTimer_timeout():
 	if heat > flash_point and fuel > 0:
-		var directions = get_directions()
-
-		for direction in directions:
-			var flame = FLAME.instance()
-			flame.set_position(Vector2(16,16))
-			flame.set_direction(direction)
-			add_child(flame)
-
-		fuel -= 1
-		heat = min(heat+1, 8)
+		pump_out_fire()
 	elif fuel <= 0:
 		on_fuel_depleted()
-		
 	if heat > 0:
 		heat -= 0.5
