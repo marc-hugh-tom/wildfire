@@ -3,19 +3,23 @@ extends Node2D
 onready var tilemap = $TileMap_below
 onready var tileset = tilemap.tile_set
 
-const CAMPFIRE = preload("res://nodes/campfire.tscn")
-const TREE = preload("res://nodes/tree.tscn")
-const DRYTREES = preload("res://nodes/dry_trees.tscn")
-const TREEHOUSE = preload("res://nodes/treehouse.tscn")
+#const CAMPFIRE = preload("res://nodes/campfire.tscn")
+#const TREE = preload("res://nodes/tree.tscn")
+#const DRYTREES = preload("res://nodes/dry_trees.tscn")
+#const TREEHOUSE = preload("res://nodes/treehouse.tscn")
+#const ICE_BLOCK = preload("res://nodes/ice_block.tscn")
+
+const BURNABLE_TREE = preload("res://nodes/burnable/burnable_tree.tscn")
+const CAMPFIRE = preload("res://nodes/burnable/campfire.tscn")
 
 var scenes_by_tile_name = {
 	"campfire": CAMPFIRE,
-	"tree": TREE,
-	"dry_trees": DRYTREES,
-	"treehouse": TREEHOUSE
+	"tree": BURNABLE_TREE,
+#	"dry_trees": DRYTREES,
+#	"treehouse": TREEHOUSE
 }
 
-var entities = []
+var grid = []
 
 func _ready():
 	tilemap.set_visible(false)
@@ -23,26 +27,25 @@ func _ready():
 	
 func init_entities():
 	var rect = tilemap.get_used_rect()
-	entities.resize(rect.get_area())
+	grid.resize(rect.get_area())
 
 	for coord in tilemap.get_used_cells():
 		var index = coord_to_index(rect, coord)
 		var cell_id = tilemap.get_cell(coord.x, coord.y)
 		var tile_name = tileset.tile_get_name(cell_id)
-		
+
 		var scene = scenes_by_tile_name[tile_name]
 		if scene != null:
 			var instance = scene.instance()
-			instance.init(coord)
-			entities[index] = instance
+#			instance.init(coord, self, "get_neighbours")
+#			instance.connect('update_position', self, "_on_entity_position")
 			add_child(instance)
 			instance.set_position(tilemap.map_to_world(coord))
-	
-	for entity in entities:
-		if entity != null:
-			for neighbour in get_neighbours(entity):
-				assert(entity != neighbour)
-				entity.fsm.connect("spread", neighbour, "_spread_callback", [entity])
+
+func _on_entity_position(instance, new_position):
+	# figure out index from new_position
+	var index = 0
+	grid[index] = [instance]
 
 func coord_to_index(rect, coord):
 	var offset = rect.position
@@ -69,7 +72,7 @@ func get_neighbours(entity):
 		if neighbour_coord.x >= rect.position.x && neighbour_coord.x < rect.end.x && \
 			neighbour_coord.y >= rect.position.y && neighbour_coord.y < rect.end.y:
 			var index = coord_to_index(rect, neighbour_coord)
-			assert(entities[index] != entity)
-			if entities[index] != null:
-				ret.push_front(entities[index])
+			assert(grid[index] != entity)
+			if grid[index] != null:
+				ret.push_front(grid[index])
 	return ret
