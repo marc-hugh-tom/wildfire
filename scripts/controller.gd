@@ -54,7 +54,11 @@ func get_neighbours(entity):
 		[-1, 0],
 		[0, 1],
 		[1, 0],
-		[0, -1]
+		[0, -1],
+		[-1, -1],
+		[1, 1],
+		[1, -1],
+		[-1, 1]
 	]
 	var ret = []
 	for neightbour in neighbours:

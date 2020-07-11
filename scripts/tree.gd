@@ -8,7 +8,7 @@ onready var on_fire_spread_texture = preload("res://assets/tree_fire_full.png")
 var pos
 
 var neighbour_fire_count = 0
-var neighbour_fire_threshold = 2
+var neighbour_fire_threshold = 4
 
 func _ready():
 	fsm.connect("on_fire", self, "_on_fire")
