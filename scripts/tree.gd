@@ -14,6 +14,9 @@ func _ready():
 func init(coord):
 	pos = coord
 
+func _spread_callback(neighbour):
+	fsm._on_fire_spread()
+
 func _on_fire():
 	$Sprite.set_texture(on_fire_start_texture)
 

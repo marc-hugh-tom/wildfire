@@ -40,7 +40,7 @@ func init_entities():
 		if entity != null:
 			for neighbour in get_neighbours(entity):
 				assert(entity != neighbour)
-				entity.fsm.connect("spread", neighbour.fsm, "_on_fire_spread")
+				entity.fsm.connect("spread", neighbour, "_spread_callback", [entity])
 
 func coord_to_index(rect, coord):
 	var offset = rect.position

@@ -9,3 +9,6 @@ func _ready():
 
 func init(coord):
 	pos = coord
+
+func _spread_callback(neighbour):
+	fsm._on_fire_spread()
