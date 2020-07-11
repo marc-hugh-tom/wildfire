@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/ice_cube.png-efa7e2dff608fd0369450db71e29227d.stex"
+path="res://.import/dry_trees_fire_full.png-c6ae072cd122b5c1a085408c72a62b04.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/ice_cube.png"
-dest_files=[ "res://.import/ice_cube.png-efa7e2dff608fd0369450db71e29227d.stex" ]
+source_file="res://assets/dry_trees_fire_full.png"
+dest_files=[ "res://.import/dry_trees_fire_full.png-c6ae072cd122b5c1a085408c72a62b04.stex" ]
 
 [params]
 

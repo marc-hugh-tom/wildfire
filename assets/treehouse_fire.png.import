@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/ice_cube.png-efa7e2dff608fd0369450db71e29227d.stex"
+path="res://.import/treehouse_fire.png-bdb4937d4c987a1cc077c1f5e34c9bf6.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/ice_cube.png"
-dest_files=[ "res://.import/ice_cube.png-efa7e2dff608fd0369450db71e29227d.stex" ]
+source_file="res://assets/treehouse_fire.png"
+dest_files=[ "res://.import/treehouse_fire.png-bdb4937d4c987a1cc077c1f5e34c9bf6.stex" ]
 
 [params]
 
