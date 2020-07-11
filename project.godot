@@ -16,12 +16,16 @@ _global_script_class_icons={
 [application]
 
 config/name="fire"
-run/main_scene="res://nodes/main.tscn"
+run/main_scene="res://nodes/scene_manager.tscn"
 config/icon="res://icon.png"
 
 [debug]
 
 settings/stdout/verbose_stdout=true
+
+[display]
+
+window/size/height=576
 
 [layer_names]
 
