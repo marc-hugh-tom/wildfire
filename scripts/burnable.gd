@@ -45,8 +45,13 @@ func on_heat_incremented(heat):
 func get_heat_increment():
 	return 1
 
+func get_fire_rotation():
+	return 0
+
 func on_ignition():
 	fire = FIRE.instance()
+	print(get_fire_rotation())
+	fire.set_rotation(get_fire_rotation())
 	add_child(fire)
 
 func get_directions():
@@ -60,6 +65,9 @@ func get_directions():
 		Vector2(1, -1),
 		Vector2(-1, 1)
 	]
+
+func get_fire_offset():
+	return Vector2(16, 8)
 
 func _on_area_entered(entity):
 	if is_a_parent_of(entity):
@@ -81,7 +89,8 @@ func _process(delta):
 	if heat > 0 and fuel > 0:
 		if fire == null:
 			fire = FIRE.instance()
-			fire.position = Vector2(16, 8)
+			fire.set_rotation(get_fire_rotation())
+			fire.position = get_fire_offset()
 			add_child(fire)
 	
 	if fire != null:
