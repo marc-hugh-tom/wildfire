@@ -23,13 +23,13 @@ config/icon="res://icon.png"
 
 settings/stdout/verbose_stdout=true
 
-[layer_names]
-
-2d_physics/layer_1="flame"
-
 [display]
 
 window/size/height=576
+
+[layer_names]
+
+2d_physics/layer_1="flame"
 
 [rendering]
 

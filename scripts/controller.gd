@@ -15,6 +15,10 @@ var scenes_by_tile_name = {
 	"dry_trees": DRY_TREE,
 }
 
+var items = [
+	PLANT_KILLER
+]
+
 var grid = []
 
 func _ready():
@@ -42,7 +46,4 @@ func coord_to_index(rect, coord):
 	return coord.x + (rect.size.x * coord.y)
 
 func plantkiller_validity(world_position):
-	var entity = entities[get_entity_index(world_position)]
-	if entity:
-		return(entity.object_type == "tree")
 	return(false)
