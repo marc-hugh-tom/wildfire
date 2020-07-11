@@ -12,6 +12,7 @@ func get_initial_fuel():
 	return 2
 
 func on_fuel_depleted():
+	.on_fuel_depleted()
 	$Sprite.set_texture(burnt_tree_texture)
 
 func get_placeable_name():
