@@ -23,8 +23,12 @@ func connect_ui_buttons():
 
 func add_level(level):
 	current_level = level.instance()
+	current_level.connect("treehouse_burnt", self, "on_treehouse_burnt")
 	add_child(current_level)
 	move_child(current_level, 0)
+	
+func on_treehouse_burnt():
+	print("on treehouse burnt")
 
 func display_placement_cursor():
 	placement_cursor = Sprite.new()
