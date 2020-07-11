@@ -11,4 +11,4 @@ func init(coord):
 	pos = coord
 
 func _on_fire():
-	print("tree is on fire!")
+	print("tree ", pos, " is on fire!")

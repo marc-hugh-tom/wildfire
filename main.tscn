@@ -10,7 +10,7 @@ script = ExtResource( 2 )
 tile_set = ExtResource( 1 )
 cell_size = Vector2( 32, 32 )
 format = 1
-tile_data = PoolIntArray( 65538, 2, 0, 65539, 0, 0, 65540, 0, 0, 65541, 0, 0, 65542, 0, 0, 65543, 1, 0, 131079, 0, 0 )
+tile_data = PoolIntArray( 65537, 2, 0, 65538, 0, 0, 65539, 0, 0, 65540, 0, 0, 65541, 0, 0, 65542, 0, 0, 65543, 1, 0, 131079, 0, 0 )
 
 [node name="TileMap_above" type="TileMap" parent="."]
 tile_set = ExtResource( 1 )
