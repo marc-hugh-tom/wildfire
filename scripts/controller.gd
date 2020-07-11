@@ -19,9 +19,9 @@ var scenes_by_tile_name = {
 	"treehouse": TREEHOUSE,
 }
 
-var items = [
-	PLANT_KILLER
-]
+var items = {
+	"Plant Killer": PLANT_KILLER
+}
 
 var grid = []
 
@@ -59,3 +59,14 @@ func plantkiller_validity(world_position):
 				if tilemap.world_to_map(child.position) == tilemap.world_to_map(world_position):
 					return(true)
 	return(false)
+
+func plantkiller_application(world_position):
+	for child in get_children():
+		if child.has_method("get_placeable_name"):
+			if child.get_placeable_name() == "tree":
+				if tilemap.world_to_map(child.position) == tilemap.world_to_map(world_position):
+					var child_position = child.get_position()
+					child.queue_free()
+					var dry_tree = DRY_TREE.instance()
+					dry_tree.set_position(child_position)
+					add_child(dry_tree)
