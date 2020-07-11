@@ -1,6 +1,7 @@
 extends Node2D
 
 signal quit
+signal play_sound
 
 # DEBUG
 const debug_level = preload("res://nodes/level_1.tscn")
@@ -42,6 +43,7 @@ func add_level(level):
 		current_level.queue_free()
 	current_level = level.instance()
 	current_level.connect("treehouse_burnt", self, "on_treehouse_burnt")
+	current_level.connect("play_sound", self, "play_sound")
 	init_item_buttons(current_level.init_items())
 	add_child(current_level)
 	move_child(current_level, 0)
@@ -220,3 +222,6 @@ func on_timer_runout():
 	$hud/timer/container/time_text.set_text("%2.2f" % 0)
 	$hud/background/reset_buttons/reset.set_disabled(false)
 	$hud/time_message.set_visible(true)
+
+func play_sound(sound_name):
+	emit_signal("play_sound", sound_name)
