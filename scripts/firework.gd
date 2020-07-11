@@ -75,7 +75,7 @@ func _on_area_entered(entity):
 		]
 		for direction in directions:
 			var flame = FLAME.instance()
-			flame.set_position(Vector2(16, 16))
+			flame.set_position(Vector2(-32 + 16, 16))
 			flame.set_direction(direction)
 			entity.get_parent().add_child(flame)
 		queue_free()

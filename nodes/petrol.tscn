@@ -13,6 +13,7 @@ texture = ExtResource( 1 )
 centered = false
 
 [node name="Area2D" type="Area2D" parent="."]
+collision_layer = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2( 16, 16 )
