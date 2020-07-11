@@ -22,6 +22,8 @@ var scenes_by_tile_name = {
 	"dry_trees": DRY_TREE,
 	"treehouse": TREEHOUSE,
 	"icecube": ICE_BLOCK,
+	"petrol": PETROL_CAN,
+	"cigarette": CIGARETTE
 }
 
 var items = {
