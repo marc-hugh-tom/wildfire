@@ -1,24 +1,10 @@
-extends Node2D
+extends "res://scripts/burnable.gd"
 
-const FLAME = preload("res://nodes/burnable/flame.tscn")
-
-func _ready():
-	$BurnTimer.connect("timeout", self, "_on_BurnTimer_timeout") 
-	$BurnTimer.start()
-
-func _on_BurnTimer_timeout():
-	var directions = [
-		Vector2(-1, 0),
-		Vector2(0, 1),
-		Vector2(1, 0),
-		Vector2(0, -1),
-		Vector2(-1, -1),
-		Vector2(1, 1),
-		Vector2(1, -1),
-		Vector2(-1, 1)
-	]
+func get_initial_heat():
+	return 1
 	
-	for direction in directions:
-		var flame = FLAME.instance()
-		flame.set_direction(direction)
-		add_child(flame)
+func get_initial_flash_point():
+	return 0
+	
+func get_initial_fuel():
+	return 20

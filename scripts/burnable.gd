@@ -7,7 +7,8 @@ var flash_point
 var fuel
 
 func _ready():
-	$Area2D.connect("area_entered", self, "_on_area_entered")
+	if $Area2D != null:
+		$Area2D.connect("area_entered", self, "_on_area_entered")
 
 	$BurnTimer.connect("timeout", self, "_on_BurnTimer_timeout") 
 	$BurnTimer.start()
