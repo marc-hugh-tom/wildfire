@@ -27,6 +27,10 @@ settings/stdout/verbose_stdout=true
 
 2d_physics/layer_1="flame"
 
+[display]
+
+window/size/height=576
+
 [rendering]
 
 environment/default_environment="res://default_env.tres"
