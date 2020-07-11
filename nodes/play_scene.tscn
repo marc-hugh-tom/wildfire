@@ -22,26 +22,51 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="buttons" type="VBoxContainer" parent="hud/background"]
+[node name="reset_buttons" type="VBoxContainer" parent="hud/background"]
 margin_left = 5.0
-margin_right = 88.0
-margin_bottom = 96.0
+margin_top = 5.0
+margin_right = 91.0
+margin_bottom = 91.0
 alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="menu" type="Button" parent="hud/background/buttons"]
-margin_top = 14.0
-margin_right = 83.0
-margin_bottom = 34.0
+[node name="menu" type="Button" parent="hud/background/reset_buttons"]
+margin_right = 86.0
+margin_bottom = 41.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 text = "Menu"
 
-[node name="reset" type="Button" parent="hud/background/buttons"]
-margin_top = 38.0
-margin_right = 83.0
-margin_bottom = 58.0
+[node name="reset" type="Button" parent="hud/background/reset_buttons"]
+margin_top = 45.0
+margin_right = 86.0
+margin_bottom = 86.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 text = "Reset level"
 
-[node name="undo" type="Button" parent="hud/background/buttons"]
-margin_top = 62.0
-margin_right = 83.0
-margin_bottom = 82.0
+[node name="simulation_buttons" type="HBoxContainer" parent="hud/background"]
+margin_left = 109.0
+margin_top = 5.0
+margin_right = 299.0
+margin_bottom = 91.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="start_stop" type="Button" parent="hud/background/simulation_buttons"]
+margin_right = 93.0
+margin_bottom = 86.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Start / Stop"
+
+[node name="undo" type="Button" parent="hud/background/simulation_buttons"]
+margin_left = 97.0
+margin_right = 190.0
+margin_bottom = 86.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 text = "Undo"

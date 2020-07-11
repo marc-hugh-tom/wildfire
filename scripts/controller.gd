@@ -1,6 +1,6 @@
 extends Node2D
 
-onready var tilemap = $TileMap_below
+onready var tilemap = $TileMap
 onready var tileset = tilemap.tile_set
 
 const CAMPFIRE = preload("res://nodes/campfire.tscn")
