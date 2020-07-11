@@ -5,7 +5,7 @@ func get_start_money():
 
 func get_available_items():
 	return [
-		"Plant Killer", "Cigarette", "Petrol Can", "Ice cube"
+		"Plant Killer", "Cigarette", "Petrol Can", "Ice cube", "Firework"
 	]
 
 func get_start_time_seconds():
