@@ -14,3 +14,7 @@ func get_next_level():
 
 func get_tutorial_text():
 	return("Rube would be proud")
+
+func get_music_path():
+	return "level_1"
+

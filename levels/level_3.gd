@@ -16,3 +16,7 @@ func get_next_level():
 
 func get_tutorial_text():
 	return("Some idiot has stuck a rock in the way! I'm sure petrol will be the solution.")
+
+func get_music_path():
+	return "level_1"
+
