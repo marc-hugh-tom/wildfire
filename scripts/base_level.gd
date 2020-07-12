@@ -163,7 +163,11 @@ func firework_validity(world_position):
 	return(true)
 
 func firework_application(world_position, item_rotation):
-	var petrol = FIREWORK.instance()
-	petrol.set_position(tilemap.map_to_world(tilemap.world_to_map(world_position))+Vector2(16,16))
-	add_child(petrol)
+	var firework = FIREWORK.instance()
+	firework.set_rotation(item_rotation)
+	firework.set_position(tilemap.map_to_world(tilemap.world_to_map(world_position))+Vector2(16,16))
+	var rotatable_node = firework.get_node("Rotatable")
+	firework.remove_child(rotatable_node)
+	rotatable_node.queue_free()
+	add_child(firework)
 
