@@ -9,7 +9,7 @@ func get_available_items():
 	]
 
 func get_start_time_seconds():
-	return 50
+	return 20
 
 func get_next_level():
 	return "level_6_b"
