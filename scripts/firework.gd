@@ -37,7 +37,7 @@ func on_heat_incremented(heat):
 
 func _process(delta):
 	if flying:
-		var angle = get_rotation() + PI
+		var angle = get_rotation()
 		var direction = Vector2(cos(angle), -sin(angle))
 		position = lerp(position, position + (direction * speed), delta)
 
