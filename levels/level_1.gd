@@ -15,7 +15,7 @@ func get_next_level():
 	return "level_2"
 
 func get_tutorial_text():
-	return("These trees don't light up very easily. Click the plant killer button, then click on the trees to kill them.")
+	return("These trees make a rubbish fuse for my firework. Click the plant killer button, then click on the trees to kill them. Then click Play.")
 
 func get_music_path():
 	return "level_1"
