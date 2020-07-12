@@ -147,7 +147,7 @@
 9/shape_one_way_margin = 0.0
 9/shapes = [  ]
 9/z_index = 0
-10/name = "rock.png 10"
+10/name = "rock"
 10/texture = ExtResource( 10 )
 10/tex_offset = Vector2( 0, 0 )
 10/modulate = Color( 1, 1, 1, 1 )
