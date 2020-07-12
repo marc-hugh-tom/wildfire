@@ -4,7 +4,7 @@ signal quit
 signal play_sound
 signal play_music
 
-const first_level = preload("res://levels/level_4.tscn")
+const first_level = preload("res://levels/level_1.tscn")
 
 var packaged_current_level = first_level
 var current_level
