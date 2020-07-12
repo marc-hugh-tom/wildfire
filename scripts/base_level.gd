@@ -38,7 +38,7 @@ var all_items = {
 	"Plant Killer": PLANT_KILLER,
 	"Cigarette": CIGARETTE,
 	"Petrol Can": PETROL_CAN,
-	"Ice cube": ICE_BLOCK,
+	"Ice Cube": ICE_BLOCK,
 	"Firework": FIREWORK,
 }
 
