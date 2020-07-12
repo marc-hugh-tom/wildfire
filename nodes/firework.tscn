@@ -1,10 +1,12 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://assets/firework.png" type="Texture" id=1]
 [ext_resource path="res://scripts/firework.gd" type="Script" id=2]
+[ext_resource path="res://scripts/rotatable.gd" type="Script" id=3]
 
-[sub_resource type="CircleShape2D" id=1]
-radius = 9.72199
+[sub_resource type="CapsuleShape2D" id=3]
+radius = 6.04327
+height = 12.0
 
 [sub_resource type="ParticlesMaterial" id=2]
 lifetime_randomness = 0.6
@@ -22,15 +24,18 @@ script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
-centered = false
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_mask = 7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2( 20, 16 )
-shape = SubResource( 1 )
+position = Vector2( 6, 0 )
+rotation = 1.5708
+shape = SubResource( 3 )
 
 [node name="Particles2D" type="Particles2D" parent="."]
-position = Vector2( 2.06017, 16.3877 )
+position = Vector2( -13, 0 )
 process_material = SubResource( 2 )
+
+[node name="Rotatable" type="Node" parent="."]
+script = ExtResource( 3 )
