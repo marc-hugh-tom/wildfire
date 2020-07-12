@@ -182,12 +182,12 @@ func start_stop():
 		get_tree().set_pause(false)
 		$Timer.set_paused(false)
 		$Timer.start()
+		set_play_stop_to_stop()
 	else:
 		get_tree().set_pause(true)
 		$hud/background/simulation_buttons/undo.set_disabled(false)
 		$hud/background/reset_buttons/reset.set_disabled(false)
 		reset_level_and_apply_action_list()
-	swap_play_stop_button()
 
 func undo():
 	emit_signal("play_sound", "button_click")
@@ -242,15 +242,10 @@ func disable_item_buttons():
 	for item_name in item_button_dict:
 		item_button_dict[item_name]["button"].set_disabled(true)
 
-func swap_play_stop_button():
+func set_play_stop_to_stop():
 	var button = $hud.get_node("background/simulation_buttons/start_stop")
-	var current_text = button.get_text()
-	if current_text == "Play":
-		button.set_text("Stop")
-		button.set_button_icon(load("res://assets/ui/stop_icon.png"))
-	if current_text == "Stop":
-		button.set_text("Play")
-		button.set_button_icon(load("res://assets/ui/play_icon.png"))
+	button.set_text("Stop")
+	button.set_button_icon(load("res://assets/ui/stop_icon.png"))
 
 func set_play_stop_to_play():
 	var button = $hud.get_node("background/simulation_buttons/start_stop")
