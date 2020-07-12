@@ -78,10 +78,14 @@ func init_next_level_button():
 	pass #TODO
 
 func init_placement_cursor():
-	placement_cursor = Sprite.new()
-	placement_cursor.set_centered(false)
-	placement_cursor.texture = valid_cursor
+	placement_cursor = Node2D.new()
+	var sprite = Sprite.new()
+	sprite.set_centered(false)
+	sprite.texture = valid_cursor
+	sprite.set_name("Sprite")
 	placement_cursor.set_visible(false)
+	placement_cursor.add_child(sprite)
+	placement_cursor.set_name("Cursor")
 	add_child(placement_cursor)
 
 func _input(event):
@@ -108,9 +112,9 @@ func update_placement_cursor(event_position):
 			placement_cursor.set_position(snapped_position)
 			placement_cursor.set_visible(true)
 			if validity_test(event_position):
-				placement_cursor.texture = valid_cursor
+				placement_cursor.get_node("Sprite").texture = valid_cursor
 			else:
-				placement_cursor.texture = invalid_cursor
+				placement_cursor.get_node("Sprite").texture = invalid_cursor
 		else:
 			placement_cursor.set_visible(false)
 	else:
