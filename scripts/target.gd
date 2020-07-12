@@ -1,6 +1,4 @@
-extends Node2D
-
-signal play_sound
+extends "res://scripts/placeable.gd"
 
 var firework = preload("res://nodes/firework.tscn")
 
@@ -17,3 +15,15 @@ func _on_area_entered(entity):
 	# i cant figure out collision layers :(
 	if entity.get_parent().has_method("im_a_firework"):
 		emit_signal("target_hit")
+
+func get_placeable_name():
+	return "target"
+
+func get_cost():
+	return 1
+	
+func get_description():
+	return "a target"
+
+func get_icon():
+	return(load("res://assets/target.png"))
