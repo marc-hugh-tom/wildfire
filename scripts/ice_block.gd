@@ -37,5 +37,5 @@ func _on_area_entered(entity):
 			var water = WATER.instance()
 			water.set_position(position+Vector2(16,16))
 			water.set_direction(direction)
-			get_parent().add_child(water)
+			get_parent().call_deferred("add_child", water)
 		queue_free()
