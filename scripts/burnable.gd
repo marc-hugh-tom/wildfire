@@ -13,7 +13,7 @@ var fire_scale = Vector2.ZERO
 var exploded = false
 
 func _ready():
-	if $Area2D != null:
+	if has_node("Area2D"):
 		$Area2D.connect("area_entered", self, "_on_area_entered")
 
 	var timer = Timer.new()
@@ -78,17 +78,17 @@ func _on_area_entered(entity):
 	if is_a_parent_of(entity):
 		return
 
-	var collision_layer = entity.get_collision_layer()
-	var layer_name = ProjectSettings.get_setting(
-		str("layer_names/2d_physics/layer_", collision_layer))
-
-	if layer_name == "flame":
+	if entity.get_collision_layer_bit(0):
 		var heat_increment = 1
 		if entity.get_parent().has_method("get_heat_increment"):
 			heat_increment = entity.get_parent().get_heat_increment()
 		heat = min(heat+heat_increment, 8)
 		if fuel > 0:
 			on_heat_incremented(heat)
+	
+	if entity.get_collision_layer_bit(4):
+		fuel = 0
+		heat = 0
 
 func _process(delta):
 	if heat > 0 and fuel > 0:
