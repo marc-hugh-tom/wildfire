@@ -83,6 +83,7 @@ func init_placement_cursor():
 	sprite.set_centered(false)
 	sprite.texture = valid_cursor
 	sprite.set_name("Sprite")
+	sprite.set_modulate(Color(1, 1, 1, 0.5))
 	placement_cursor.set_visible(false)
 	placement_cursor.add_child(sprite)
 	placement_cursor.set_name("Cursor")
@@ -92,7 +93,7 @@ func _input(event):
 	if event is InputEventMouseMotion:
 		update_placement_cursor(event.position)
 	if event is InputEventMouseButton:
-		if not event.is_pressed():
+		if event.button_index == BUTTON_LEFT and not event.is_pressed():
 			if world_position_on_map(event.position):
 				if current_item:
 					if validity_test(event.position):
@@ -124,24 +125,29 @@ func validity_test(world_position):
 	return(current_level.callv(current_item.get_placeable_name() + "_validity", [world_position]))
 
 func apply_and_record_item(world_position):
+	var item_rotation = 0
+	if placement_cursor.has_node("Icon"):
+		if placement_cursor.get_node("Icon").has_node("Rotatable"):
+			item_rotation = placement_cursor.get_node("Icon").get_node("Rotatable")._rotation
 	action_list.append(
 		{
 			"item": current_item,
-			"position": world_position
+			"position": world_position,
+			"item_rotation": item_rotation
 		}
 	)
-	apply_item(current_item, world_position)
-
+	apply_item(current_item, world_position, item_rotation)
 
 func reset_level_and_apply_action_list():
 	add_level(packaged_current_level)
 	for action in action_list:
-		apply_item(action["item"], action["position"])
+		apply_item(action["item"], action["position"], action["item_rotation"])
 
-func apply_item(item, world_position):
+func apply_item(item, world_position, item_rotation):
 	current_money -= item.get_cost()
 	update_money()
-	current_level.callv(item.get_placeable_name() + "_application", [world_position])
+	current_level.callv(item.get_placeable_name() + "_application",
+		[world_position, item_rotation])
 
 func start_stop():
 	if get_tree().is_paused():
@@ -181,6 +187,15 @@ func init_item_buttons(item_dict):
 
 func item_swap_callback(item_name):
 	current_item = current_level.init_items()[item_name].instance()
+	var icon = current_item.duplicate()
+	if icon.has_node("Rotatable"):
+		icon.position += Vector2(16, 16)
+	icon.name = "Icon"
+	if placement_cursor.has_node("Icon"):
+		var node_to_delete = placement_cursor.get_node("Icon")
+		placement_cursor.remove_child(node_to_delete)
+		node_to_delete.queue_free()
+	placement_cursor.add_child(icon)
 
 func update_money():
 	$hud.get_node("money").set_text("£" + str(current_money))

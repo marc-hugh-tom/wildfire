@@ -14,7 +14,6 @@ func _process(delta):
 func _input(event):
 	if event is InputEventMouseButton:
 		if event.button_index == BUTTON_RIGHT and event.pressed:
-			var pp = get_parent().position
-			var click = event.position
-			if click.x > pp.x-16 and click.x < pp.x+16 and click.y > pp.y-16 and click.y < pp.y+16:
+			var click = get_parent().to_local(event.position)
+			if click.x > -16 and click.x < 16 and click.y > -16 and click.y < 16:
 				_rotate()
