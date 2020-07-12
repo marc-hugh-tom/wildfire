@@ -1,7 +1,5 @@
 extends "res://scripts/burnable.gd"
 
-onready var burnt_cigarette = preload("res://assets/cigarette/cigarette_burnt.png")
-
 func get_initial_heat():
 	return 1
 	

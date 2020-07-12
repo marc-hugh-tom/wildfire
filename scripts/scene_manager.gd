@@ -2,7 +2,7 @@ extends Node2D
 
 const play_scene = preload("res://nodes/play_scene.tscn")
 const menu_scene = preload("res://nodes/menu_scene.tscn")
-#const credits_scene = preload("res://nodes/credits_scene.tscn")
+const credits_scene = preload("res://nodes/credits_scene.tscn")
 const scene_transition = preload("res://nodes/scene_transition.tscn")
 const audio_manager = preload("res://nodes/audio_manager.tscn")
 
@@ -35,11 +35,25 @@ func start_menu():
 		initiate_fade_to_black("deferred_start_menu")
 
 func deferred_start_menu():
+	get_tree().set_pause(false)
 	clear_scene()
 	var menu = menu_scene.instance()
 	menu.connect("start_game", self, "start_new_game")
+	menu.connect("start_credits", self, "start_credits")
 	menu.connect("play_sound", self, "play_sound")
 	add_child(menu)
+	initiate_fade_to_transparent("remove_transition_overlay")
+
+func start_credits():
+	if not has_node("scene_transition"):
+		initiate_fade_to_black("deferred_start_credits")
+
+func deferred_start_credits():
+	clear_scene()
+	var credits = credits_scene.instance()
+	credits.connect("quit", self, "start_menu")
+	credits.connect("play_sound", self, "play_sound")
+	add_child(credits)
 	initiate_fade_to_transparent("remove_transition_overlay")
 
 func clear_scene():
