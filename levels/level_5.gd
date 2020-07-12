@@ -4,18 +4,16 @@ func get_start_money():
 	return 10
 
 func get_available_items():
-	return [
-		"Plant Killer", "Petrol Can"
-	]
+	return [ "Cigarette" ]
 
 func get_start_time_seconds():
 	return 20
 
 func get_next_level():
-	return "level_4"
+	return "level_6"
 
 func get_tutorial_text():
-	return("Some idiot has stuck a rock in the way! I'm sure petrol will be the solution.")
+	return("Rube would be proud")
 
 func get_music_path():
 	return "level_1"
