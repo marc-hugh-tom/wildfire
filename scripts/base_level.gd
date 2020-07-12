@@ -11,6 +11,7 @@ const CAMPFIRE = preload("res://nodes/campfire.tscn")
 const TREE = preload("res://nodes/tree.tscn")
 const DRY_TREE = preload("res://nodes/dry_trees.tscn")
 const TREEHOUSE = preload("res://nodes/treehouse.tscn")
+const ROCK = preload("res://nodes/rock.tscn")
 
 const PLANT_KILLER = preload("res://nodes/plantkiller.tscn")
 const CIGARETTE = preload("res://nodes/cigarette.tscn")
@@ -26,6 +27,7 @@ var scenes_by_tile_name = {
 	"dry_trees": DRY_TREE,
 	"treehouse": TREEHOUSE,
 	"icecube": ICE_BLOCK,
+	"rock": ROCK,
 	"petrol": PETROL_CAN,
 	"cigarette": CIGARETTE,
 	"firework": FIREWORK,
