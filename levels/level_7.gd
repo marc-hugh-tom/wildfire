@@ -16,3 +16,6 @@ func get_next_level():
 
 func get_tutorial_text():
 	return("You're on your own!")
+
+func get_music_path():
+	return "level_1"

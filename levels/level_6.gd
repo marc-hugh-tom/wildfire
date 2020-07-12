@@ -16,3 +16,6 @@ func get_next_level():
 
 func get_tutorial_text():
 	return("I don't want to burn down my house, I just want to chill.")
+
+func get_music_path():
+	return "level_2"
