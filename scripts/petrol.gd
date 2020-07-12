@@ -17,6 +17,8 @@ func get_placeable_name():
 func on_fuel_depleted():
 	.on_fuel_depleted()
 	$Sprite.set_texture(destroyed_petrol_texture)
+	if has_node("Area2D"):
+		$Area2D.queue_free()
 
 func pump_out_fire():
 	if not exploded:
