@@ -26,7 +26,7 @@ func get_icon():
 	return(load("res://assets/treehouse.png"))
 
 func on_heat_incremented(heat):
-	if heat == 1:
+	if heat >= 1:
 		$Sprite.set_texture(treehouse_fire_texture)
 		emit_signal("treehouse_burnt")
 

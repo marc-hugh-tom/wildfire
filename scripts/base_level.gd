@@ -160,6 +160,6 @@ func firework_validity(world_position):
 
 func firework_application(world_position):
 	var petrol = FIREWORK.instance()
-	petrol.set_position(tilemap.map_to_world(tilemap.world_to_map(world_position)))
+	petrol.set_position(tilemap.map_to_world(tilemap.world_to_map(world_position))+Vector2(16,16))
 	add_child(petrol)
 

@@ -37,7 +37,9 @@ func on_heat_incremented(heat):
 
 func _process(delta):
 	if flying:
-		position = lerp(position, position + Vector2(1, 0), delta * speed)
+		var angle = get_rotation()
+		var direction = Vector2(cos(angle), sin(angle))
+		position = lerp(position, position + (direction * speed), delta)
 
 func get_directions():
 	return []
@@ -46,7 +48,7 @@ func get_fire_rotation():
 	return 2 * PI * 0.75
 
 func get_fire_offset():
-	return Vector2(-5, 16)
+	return Vector2(-16, 0)
 
 func get_heat_increment():
 	return 100
@@ -78,7 +80,7 @@ func _on_area_entered(entity):
 		]
 		for direction in directions:
 			var flame = FLAME.instance()
-			flame.set_position(Vector2(-32 + 16, 16))
+			flame.set_position(Vector2(16, 16))
 			flame.set_direction(direction)
 			entity.get_parent().add_child(flame)
 		queue_free()
