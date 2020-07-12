@@ -12,7 +12,7 @@ func get_start_time_seconds():
 	return 42
 
 func get_next_level():
-	return "level_10"
+	return "thank_you"
 
 func get_tutorial_text():
-	return("999.")
+	return("It's all about the timing.")
