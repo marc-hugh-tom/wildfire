@@ -42,6 +42,7 @@ func add_level(level):
 		current_level.queue_free()
 	current_level = level.instance()
 	current_level.connect("treehouse_burnt", self, "on_treehouse_burnt")
+	current_level.connect("target_hit", self, "on_success")
 	init_item_buttons(current_level.init_items())
 	add_child(current_level)
 	move_child(current_level, 0)

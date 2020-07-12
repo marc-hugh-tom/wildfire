@@ -1,6 +1,7 @@
 extends Node2D
 
 signal treehouse_burnt
+signal target_hit
 
 onready var tilemap = $TileMap
 onready var tileset = tilemap.tile_set
@@ -16,6 +17,7 @@ const PETROL_CAN = preload("res://nodes/petrol.tscn")
 
 const ICE_BLOCK = preload("res://nodes/ice_block.tscn")
 const FIREWORK = preload("res://nodes/firework.tscn")
+const TARGET = preload("res://nodes/target.tscn")
 
 var scenes_by_tile_name = {
 	"campfire": CAMPFIRE,
@@ -25,7 +27,8 @@ var scenes_by_tile_name = {
 	"icecube": ICE_BLOCK,
 	"petrol": PETROL_CAN,
 	"cigarette": CIGARETTE,
-	"firework": FIREWORK
+	"firework": FIREWORK,
+	"target": TARGET,
 }
 
 var all_items = {
@@ -76,6 +79,9 @@ func init_entities():
 
 			if tile_name == "treehouse":
 				instance.connect("treehouse_burnt", self, "emit_signal", ["treehouse_burnt"])
+
+			if tile_name == "target":
+				instance.connect("target_hit", self, "emit_signal", ["target_hit"])
 
 func coord_to_index(rect, coord):
 	var offset = rect.position

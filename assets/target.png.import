@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/petrol.png-e5417402ff6024588e5df70148c19ee2.stex"
+path="res://.import/target.png-52c019dda84da6fc854650719104c4ec.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/petrol.png"
-dest_files=[ "res://.import/petrol.png-e5417402ff6024588e5df70148c19ee2.stex" ]
+source_file="res://assets/target.png"
+dest_files=[ "res://.import/target.png-52c019dda84da6fc854650719104c4ec.stex" ]
 
 [params]
 

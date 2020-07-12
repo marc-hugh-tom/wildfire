@@ -13,6 +13,9 @@ func get_initial_heat():
 func get_initial_flash_point():
 	return 1
 
+func im_a_firework():
+	return true
+
 func get_initial_fuel():
 	return 1
 
