@@ -60,13 +60,25 @@ func get_start_time_seconds():
 func get_next_level():
 	assert(false)
 
+func get_tutorial_text():
+	return("")
+
 func _ready():
 	tilemap.set_visible(false)
+	init_non_tile_entities()
 	init_entities()
+
+func init_non_tile_entities():
+	for child in get_children():
+		if child.has_node("Rotatable"):
+			var rotate_node = child.get_node("Rotatable")
+			child.remove_child(rotate_node)
+			rotate_node.queue_free()
+		if child.has_signal("play_sound"):
+			child.connect("play_sound", self, "play_sound")
 
 func init_entities():
 	var rect = tilemap.get_used_rect()
-
 	for coord in tilemap.get_used_cells():
 		var index = coord_to_index(rect, coord)
 		var cell_id = tilemap.get_cell(coord.x, coord.y)
@@ -76,6 +88,8 @@ func init_entities():
 		if scene != null:
 			var instance = scene.instance()
 			add_child(instance)
+			if not instance.has_signal("play_sound"):
+				print(instance)
 			instance.connect("play_sound", self, "play_sound")
 			instance.set_position(tilemap.map_to_world(coord))
 			if tile_name == "treehouse":
