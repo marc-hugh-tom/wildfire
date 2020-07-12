@@ -2,6 +2,13 @@ extends Node2D
 
 var sound_library = {
 	"explosion": ["res://assets/sounds/explosion.wav", -3],
+	"spit_flame": ["res://assets/sounds/spit_flame.wav", -3],
+	"screach": ["res://assets/sounds/firework_screach.wav", -3],
+	"button_click": ["res://assets/sounds/button_click.wav", -3],
+	"woo": ["res://assets/sounds/woo.wav", -3],
+	"aww": ["res://assets/sounds/aww.wav", -3],
+	"invalid": ["res://assets/sounds/invalid_position.wav", -1],
+	"valid": ["res://assets/sounds/valid_position.wav", -3],
 	"level_1": ["res://assets/sounds/level_1.ogg", -10],
 	"level_2": ["res://assets/sounds/level_2.ogg", -10]
 }

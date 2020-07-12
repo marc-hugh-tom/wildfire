@@ -114,6 +114,7 @@ func pump_out_fire():
 		add_child(flame)
 	fuel -= 1
 	heat = min(heat+get_heat_increment(), 8)
+	emit_signal("play_sound", "spit_flame")
 
 func _on_BurnTimer_timeout():
 	if heat > flash_point and fuel > 0:
