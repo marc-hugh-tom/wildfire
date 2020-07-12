@@ -2,6 +2,7 @@ extends Node2D
 
 signal quit
 signal play_sound
+signal play_music
 
 const first_level = preload("res://levels/level_1.tscn")
 
@@ -55,6 +56,7 @@ func add_level(level):
 	init_next_level_button()
 	init_tutorial_text()
 	set_play_stop_to_play()
+	emit_signal("play_music", current_level.get_music_path())
 
 func init_tutorial_text():
 	var text = current_level.get_tutorial_text()

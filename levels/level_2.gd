@@ -16,3 +16,6 @@ func get_next_level():
 
 func get_tutorial_text():
 	return("Bloody trees didn't grow back very well, I'm sure there's something around here to get the firework lit...")
+
+func get_music_path():
+	return "level_2"

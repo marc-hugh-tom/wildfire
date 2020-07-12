@@ -16,3 +16,6 @@ func get_next_level():
 
 func get_tutorial_text():
 	return("These trees don't light up very easily. Click the plant killer button, then click on the trees to kill them.")
+
+func get_music_path():
+	return "level_1"

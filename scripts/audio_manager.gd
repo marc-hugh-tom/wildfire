@@ -1,18 +1,15 @@
 extends Node2D
 
 var sound_library = {
-	"explosion": ["res://assets/sounds/explosion.wav", -3]
-#	"jump": ["res://assets/sounds/jump.wav",       -10],
-#	"shape": ["res://assets/sounds/shape.wav",     -3],
-#	"gunshot": ["res://assets/sounds/gunshot.wav", -3],
-#	"bounce": ["res://assets/sounds/bounce.wav",   -10],
-#	"button_press": ["res://assets/sounds/button_press.wav",   -10],
-#	"swing": ["res://assets/sounds/swing.wav",   -10]
+	"explosion": ["res://assets/sounds/explosion.wav", -3],
+	"level_1": ["res://assets/sounds/level_1.ogg", -10],
+	"level_2": ["res://assets/sounds/level_2.ogg", -10]
 }
 
 var music_volume = -10
 
 var stream_library = {}
+var current_music
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -29,3 +26,12 @@ func _ready():
 func play_sound(sound_str):
 	if sound_str in stream_library:
 		stream_library[sound_str].play()
+
+func set_music_path(music_path):
+	if music_path in stream_library:
+		if current_music != music_path:
+			if current_music != null:
+				stream_library[current_music].stop()
+			current_music = music_path
+			$Music.set_stream(stream_library[music_path])
+			stream_library[music_path].play()
