@@ -14,6 +14,8 @@ func get_initial_fuel():
 func on_fuel_depleted():
 	.on_fuel_depleted()
 	$Sprite.set_texture(burnt_tree_texture)
+	if has_node("Area2D"):
+		$Area2D.queue_free()
 
 func get_placeable_name():
 	return "dry tree"

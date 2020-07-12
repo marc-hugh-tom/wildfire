@@ -9,11 +9,13 @@ func get_initial_flash_point():
 	return 4
 	
 func get_initial_fuel():
-	return 5
+	return 4
 
 func on_fuel_depleted():
 	.on_fuel_depleted()
 	$Sprite.set_texture(burnt_tree_texture)
+	if has_node("Area2D"):
+		$Area2D.queue_free()
 
 func get_placeable_name():
 	return "tree"

@@ -26,6 +26,7 @@ func deferred_new_game():
 	var new_game = play_scene.instance()
 	new_game.connect("quit", self, "start_menu")
 	new_game.connect("play_sound", self, "play_sound")
+	new_game.connect("play_music", self, "play_music")
 	add_child(new_game)
 	initiate_fade_to_transparent("remove_transition_overlay")
 
@@ -68,3 +69,6 @@ func remove_transition_overlay():
 
 func play_sound(sound_name):
 	audio.play_sound(sound_name)
+
+func play_music(music_path):
+	audio.set_music_path(music_path)

@@ -1,5 +1,7 @@
 extends "res://scripts/burnable.gd"
 
+onready var burnt_cigarette = preload("res://assets/cigarette/cigarette_burnt.png")
+
 func get_initial_heat():
 	return 1
 	
@@ -17,6 +19,12 @@ func get_cost():
 
 func get_description():
 	return "A carelessly discarded cigarette."
+	
+func on_fuel_depleted():
+	.on_fuel_depleted()
+	$Sprite.set_texture(burnt_cigarette)
+	if has_node("Area2D"):
+		$Area2D.queue_free()
 
 func get_icon():
 	return(load("res://assets/cigarette/cigarette1.png"))
