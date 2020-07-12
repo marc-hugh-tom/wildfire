@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/valid_position.wav-9065ab5ec166abdeff65b6a3138f0941.sample"
+
+[deps]
+
+source_file="res://assets/sounds/valid_position.wav"
+dest_files=[ "res://.import/valid_position.wav-9065ab5ec166abdeff65b6a3138f0941.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

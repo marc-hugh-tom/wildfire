@@ -34,6 +34,7 @@ func get_icon():
 func on_heat_incremented(heat):
 	flying = true
 	$Particles2D.set_emitting(true)
+	emit_signal("play_sound", "screach")
 
 func _process(delta):
 	if flying:
@@ -85,4 +86,5 @@ func _on_area_entered(entity):
 			flame.set_direction(direction)
 			# Oh shiii
 			entity.get_parent().get_parent().add_child(flame)
+		emit_signal("play_sound", "explosion")
 		queue_free()

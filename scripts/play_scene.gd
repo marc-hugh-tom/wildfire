@@ -28,13 +28,17 @@ func _ready():
 
 func connect_ui_buttons():
 	$hud.get_node("background/reset_buttons/menu").connect(
-		"button_up", self, "emit_signal", ["quit"])
+		"button_up", self, "menu_button_callback")
 	$hud.get_node("background/reset_buttons/reset").connect(
 		"button_up", self, "completely_reset_level")
 	$hud.get_node("background/simulation_buttons/start_stop").connect(
 		"button_up", self, "start_stop")
 	$hud.get_node("background/simulation_buttons/undo").connect(
 		"button_up", self, "undo")
+
+func menu_button_callback():
+	emit_signal("play_sound", "button_click")
+	emit_signal("quit")
 
 func add_level(level):
 	hide_messages()
@@ -70,23 +74,27 @@ func hide_messages():
 	$hud/win_message.set_visible(false)
 
 func completely_reset_level():
+	emit_signal("play_sound", "button_click")
 	action_list = []
 	add_level(packaged_current_level)
 
 func on_treehouse_burnt():
 	$Timer.set_paused(true)
 	$hud/background/reset_buttons/reset.set_disabled(false)
+	emit_signal("play_sound", "aww")
 	$hud/lose_message.set_visible(true)
 
 func on_success():
 	$Timer.set_paused(true)
 	$hud/background/reset_buttons/reset.set_disabled(false)
+	emit_signal("play_sound", "woo")
 	$hud/win_message.set_visible(true)
 
 func init_next_level_button():
 	$hud/win_message/hbox/margin/next_level.connect("button_up", self, "go_to_next_level")
 
 func go_to_next_level():
+	emit_signal("play_sound", "button_click")
 	packaged_current_level = load("res://levels/" + current_level.get_next_level() + ".tscn")
 	add_level(packaged_current_level)
 
@@ -110,7 +118,10 @@ func _input(event):
 			if world_position_on_map(event.position):
 				if current_item:
 					if validity_test(event.position):
+						emit_signal("play_sound", "valid")
 						apply_and_record_item(event.position)
+					else:
+						emit_signal("play_sound", "invalid")
 
 # Tests if a position is on the map. If false, it's on the UI
 func world_position_on_map(world_position):
@@ -163,6 +174,7 @@ func apply_item(item, world_position, item_rotation):
 		[world_position, item_rotation])
 
 func start_stop():
+	emit_signal("play_sound", "button_click")
 	if get_tree().is_paused():
 		disable_item_buttons()
 		$hud/background/simulation_buttons/undo.set_disabled(true)
@@ -178,6 +190,7 @@ func start_stop():
 	swap_play_stop_button()
 
 func undo():
+	emit_signal("play_sound", "button_click")
 	action_list.pop_back()
 	reset_level_and_apply_action_list()
 
@@ -199,6 +212,7 @@ func init_item_buttons(item_dict):
 		}
 
 func item_swap_callback(item_name):
+	emit_signal("play_sound", "button_click")
 	current_item = current_level.init_items()[item_name].instance()
 	var icon = current_item.duplicate()
 	if icon.has_node("Rotatable"):
@@ -264,6 +278,7 @@ func _process(delta):
 func on_timer_runout():
 	$hud/timer/container/time_text.set_text("%2.2f" % 0)
 	$hud/background/reset_buttons/reset.set_disabled(false)
+	emit_signal("play_sound", "aww")
 	$hud/time_message.set_visible(true)
 
 func play_sound(sound_name):

@@ -37,6 +37,7 @@ func deferred_start_menu():
 	clear_scene()
 	var menu = menu_scene.instance()
 	menu.connect("start_game", self, "start_new_game")
+	menu.connect("play_sound", self, "play_sound")
 	add_child(menu)
 	initiate_fade_to_transparent("remove_transition_overlay")
 
