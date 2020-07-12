@@ -4,7 +4,6 @@ var speed = 200
 var flying = false
 
 func _ready():
-	$Area2D.connect("area_entered", self, "_on_area_entered")
 	$Particles2D.set_emitting(false)
 
 func get_initial_heat():
@@ -85,6 +84,6 @@ func _on_area_entered(entity):
 			flame.set_position(position)
 			flame.set_direction(direction)
 			# Oh shiii
-			entity.get_parent().get_parent().add_child(flame)
+			entity.get_parent().get_parent().call_deferred("add_child", flame)
 		emit_signal("play_sound", "explosion")
 		queue_free()

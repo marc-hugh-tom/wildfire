@@ -188,5 +188,6 @@ func firework_application(world_position, item_rotation):
 	var rotatable_node = firework.get_node("Rotatable")
 	firework.remove_child(rotatable_node)
 	rotatable_node.queue_free()
+	firework.connect("play_sound", self, "play_sound")
 	add_child(firework)
 

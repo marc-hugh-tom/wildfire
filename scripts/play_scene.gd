@@ -26,6 +26,7 @@ func _ready():
 	set_pause_mode(PAUSE_MODE_PROCESS)
 	add_level(packaged_current_level)
 	init_placement_cursor()
+	init_next_level_button()
 
 func connect_ui_buttons():
 	$hud.get_node("background/reset_buttons/menu").connect(
@@ -57,7 +58,6 @@ func add_level(level):
 	current_money = current_level.get_start_money()
 	update_money()
 	init_timer(current_level.get_start_time_seconds())
-	init_next_level_button()
 	init_tutorial_text()
 	set_play_stop_to_play()
 	emit_signal("play_music", current_level.get_music_path())
@@ -97,6 +97,7 @@ func init_next_level_button():
 
 func go_to_next_level():
 	emit_signal("play_sound", "button_click")
+	$hud/background/simulation_buttons/undo.set_disabled(false)
 	packaged_current_level = load("res://levels/" + current_level.get_next_level() + ".tscn")
 	add_level(packaged_current_level)
 

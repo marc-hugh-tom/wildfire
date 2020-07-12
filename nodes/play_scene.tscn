@@ -148,6 +148,65 @@ custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "00.00"
 
+[node name="win_message" type="TextureRect" parent="hud"]
+visible = false
+margin_left = 192.0
+margin_top = 16.0
+margin_right = 832.0
+margin_bottom = 112.0
+texture = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="hbox" type="HBoxContainer" parent="hud/win_message"]
+margin_right = 640.0
+margin_bottom = 96.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="vbox" type="VBoxContainer" parent="hud/win_message/hbox"]
+margin_right = 494.0
+margin_bottom = 96.0
+size_flags_horizontal = 3
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="title" type="Label" parent="hud/win_message/hbox/vbox"]
+margin_top = 17.0
+margin_right = 494.0
+margin_bottom = 53.0
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Success!"
+align = 1
+
+[node name="message" type="Label" parent="hud/win_message/hbox/vbox"]
+margin_top = 57.0
+margin_right = 494.0
+margin_bottom = 79.0
+custom_fonts/font = SubResource( 4 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Continue to the next level"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="margin" type="MarginContainer" parent="hud/win_message/hbox"]
+margin_left = 498.0
+margin_right = 640.0
+margin_bottom = 96.0
+
+[node name="next_level" type="Button" parent="hud/win_message/hbox/margin"]
+margin_right = 142.0
+margin_bottom = 96.0
+custom_fonts/font = ExtResource( 4 )
+text = "Next Level"
+
 [node name="time_message" type="TextureRect" parent="hud"]
 visible = false
 margin_left = 192.0
@@ -227,65 +286,6 @@ align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="win_message" type="TextureRect" parent="hud"]
-visible = false
-margin_left = 192.0
-margin_top = 16.0
-margin_right = 832.0
-margin_bottom = 112.0
-texture = ExtResource( 7 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="hbox" type="HBoxContainer" parent="hud/win_message"]
-margin_right = 640.0
-margin_bottom = 96.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="vbox" type="VBoxContainer" parent="hud/win_message/hbox"]
-margin_right = 494.0
-margin_bottom = 96.0
-size_flags_horizontal = 3
-alignment = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="title" type="Label" parent="hud/win_message/hbox/vbox"]
-margin_top = 17.0
-margin_right = 494.0
-margin_bottom = 53.0
-custom_fonts/font = SubResource( 3 )
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "Success!"
-align = 1
-
-[node name="message" type="Label" parent="hud/win_message/hbox/vbox"]
-margin_top = 57.0
-margin_right = 494.0
-margin_bottom = 79.0
-custom_fonts/font = SubResource( 4 )
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "Continue to the next level"
-align = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="margin" type="MarginContainer" parent="hud/win_message/hbox"]
-margin_left = 498.0
-margin_right = 640.0
-margin_bottom = 96.0
-
-[node name="next_level" type="Button" parent="hud/win_message/hbox/margin"]
-margin_right = 142.0
-margin_bottom = 96.0
-custom_fonts/font = ExtResource( 4 )
-text = "Next Level"
 
 [node name="tutorial_text" type="Label" parent="hud"]
 visible = false
