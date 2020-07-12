@@ -1,7 +1,7 @@
 extends "res://scripts/base_level.gd"
 
 func get_start_money():
-	return 12
+	return 15
 
 func get_available_items():
 	return [
