@@ -98,6 +98,7 @@ func init_next_level_button():
 func go_to_next_level():
 	emit_signal("play_sound", "button_click")
 	$hud/background/simulation_buttons/undo.set_disabled(false)
+	action_list = []
 	packaged_current_level = load("res://levels/" + current_level.get_next_level() + ".tscn")
 	add_level(packaged_current_level)
 
