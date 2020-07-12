@@ -1,11 +1,12 @@
 extends Node2D
 
-var speed = 3
+var speed = 2
 var direction = Vector2.ZERO
 var target_position = Vector2.ZERO
 
 func _ready():
-	$Area2D.connect("area_entered", self, "_on_area_entered")
+	if has_node("Area2D"):
+		$Area2D.connect("area_entered", self, "_on_area_entered")
 
 func set_direction(d):
 	direction = d
@@ -18,6 +19,6 @@ func _process(delta):
 	if position.distance_to(target_position) < 2:
 		queue_free()
 
-func _on_area_entered(entity):
-	if entity.get_collision_layer_bit(4):
-		queue_free()
+func _on_area_entered(entity):	
+	if entity.get_collision_layer_bit(0):
+		entity.queue_free()
