@@ -7,7 +7,7 @@ func get_initial_flash_point():
 	return 0
 	
 func get_initial_fuel():
-	return 3
+	return 2
 
 func get_placeable_name():
 	return "cigarette"
@@ -23,6 +23,12 @@ func get_icon():
 
 func get_directions():
 	return [
-		Vector2(0, -1),
-		Vector2(0, -1),
+		Vector2(-1, 0),
+		Vector2(-1, 0),
 	]
+
+func get_flame_offset():
+	return Vector2(-16, 2)
+
+func get_fire_offset():
+	return Vector2(-16, -4)

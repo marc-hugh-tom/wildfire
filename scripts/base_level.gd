@@ -122,7 +122,7 @@ func cigarette_validity(world_position):
 func cigarette_application(world_position):
 	var cigarette = CIGARETTE.instance()
 	cigarette.connect("play_sound", self, "play_sound")
-	cigarette.set_position(tilemap.map_to_world(tilemap.world_to_map(world_position)))
+	cigarette.set_position(tilemap.map_to_world(tilemap.world_to_map(world_position)) + Vector2(16,16))
 	add_child(cigarette)
 
 func petrol_validity(world_position):

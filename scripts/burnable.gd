@@ -70,6 +70,9 @@ func get_directions():
 
 func get_fire_offset():
 	return Vector2(16, 8)
+	
+func get_flame_offset():
+	return Vector2(16, 16)
 
 func _on_area_entered(entity):
 	if is_a_parent_of(entity):
@@ -106,7 +109,7 @@ func pump_out_fire():
 	var directions = get_directions()
 	for direction in directions:
 		var flame = FLAME.instance()
-		flame.set_position(Vector2(16,16))
+		flame.set_position(get_flame_offset())
 		flame.set_direction(direction)
 		add_child(flame)
 	fuel -= 1
