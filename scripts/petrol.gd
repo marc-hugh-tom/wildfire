@@ -18,6 +18,11 @@ func on_fuel_depleted():
 	.on_fuel_depleted()
 	$Sprite.set_texture(destroyed_petrol_texture)
 
+func pump_out_fire():
+	if not exploded:
+		emit_signal("play_sound", "explosion")
+	.pump_out_fire()
+
 func get_cost():
 	return 1
 

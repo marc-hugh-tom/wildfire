@@ -2,6 +2,7 @@ extends Node2D
 
 signal treehouse_burnt
 signal target_hit
+signal play_sound
 
 onready var tilemap = $TileMap
 onready var tileset = tilemap.tile_set
@@ -75,8 +76,8 @@ func init_entities():
 		if scene != null:
 			var instance = scene.instance()
 			add_child(instance)
+			instance.connect("play_sound", self, "play_sound")
 			instance.set_position(tilemap.map_to_world(coord))
-
 			if tile_name == "treehouse":
 				instance.connect("treehouse_burnt", self, "emit_signal", ["treehouse_burnt"])
 
@@ -87,6 +88,9 @@ func coord_to_index(rect, coord):
 	var offset = rect.position
 	coord -= offset
 	return coord.x + (rect.size.x * coord.y)
+
+func play_sound(sound_name):
+	emit_signal("play_sound", sound_name)
 
 func plantkiller_validity(world_position):
 	for child in get_children():
@@ -104,6 +108,7 @@ func plantkiller_application(world_position):
 					var child_position = child.get_position()
 					child.queue_free()
 					var dry_tree = DRY_TREE.instance()
+					dry_tree.connect("play_sound", self, "play_sound")
 					dry_tree.set_position(child_position)
 					add_child(dry_tree)
 
@@ -116,6 +121,7 @@ func cigarette_validity(world_position):
 
 func cigarette_application(world_position):
 	var cigarette = CIGARETTE.instance()
+	cigarette.connect("play_sound", self, "play_sound")
 	cigarette.set_position(tilemap.map_to_world(tilemap.world_to_map(world_position)))
 	add_child(cigarette)
 
@@ -128,6 +134,7 @@ func petrol_validity(world_position):
 
 func petrol_application(world_position):
 	var petrol = PETROL_CAN.instance()
+	petrol.connect("play_sound", self, "play_sound")
 	petrol.set_position(tilemap.map_to_world(tilemap.world_to_map(world_position)))
 	add_child(petrol)
 
@@ -139,9 +146,10 @@ func ice_block_validity(world_position):
 	return(true)
 
 func ice_block_application(world_position):
-	var petrol = ICE_BLOCK.instance()
-	petrol.set_position(tilemap.map_to_world(tilemap.world_to_map(world_position)))
-	add_child(petrol)
+	var ice = ICE_BLOCK.instance()
+	ice.connect("play_sound", self, "play_sound")
+	ice.set_position(tilemap.map_to_world(tilemap.world_to_map(world_position)))
+	add_child(ice)
 
 func firework_validity(world_position):
 	for child in get_children():

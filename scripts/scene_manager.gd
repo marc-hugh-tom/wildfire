@@ -4,8 +4,13 @@ const play_scene = preload("res://nodes/play_scene.tscn")
 const menu_scene = preload("res://nodes/menu_scene.tscn")
 #const credits_scene = preload("res://nodes/credits_scene.tscn")
 const scene_transition = preload("res://nodes/scene_transition.tscn")
+const audio_manager = preload("res://nodes/audio_manager.tscn")
+
+var audio
 
 func _ready():
+	audio = audio_manager.instance()
+	add_child(audio)
 	set_pause_mode(PAUSE_MODE_PROCESS)
 	var transition = scene_transition.instance()
 	transition.set_to_black()
@@ -20,6 +25,7 @@ func deferred_new_game():
 	clear_scene()
 	var new_game = play_scene.instance()
 	new_game.connect("quit", self, "start_menu")
+	new_game.connect("play_sound", self, "play_sound")
 	add_child(new_game)
 	initiate_fade_to_transparent("remove_transition_overlay")
 
@@ -36,7 +42,8 @@ func deferred_start_menu():
 
 func clear_scene():
 	for child in get_children():
-		child.free()
+		if not child == audio:
+			child.free()
 
 func initiate_fade_to_black(input_callback_str):
 	var transition = scene_transition.instance()
@@ -57,3 +64,6 @@ func transition_finished_callback(callback_str):
 
 func remove_transition_overlay():
 	$scene_transition.queue_free()
+
+func play_sound(sound_name):
+	audio.play_sound(sound_name)

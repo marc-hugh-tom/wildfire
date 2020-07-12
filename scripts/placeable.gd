@@ -1,5 +1,7 @@
 extends Node2D
 
+signal play_sound
+
 func get_placeable_name():
 	assert(false)
 
