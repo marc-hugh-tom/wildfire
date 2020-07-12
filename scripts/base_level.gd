@@ -65,6 +65,9 @@ func get_next_level():
 func get_tutorial_text():
 	return("")
 
+func get_music_path():
+	return ""
+
 func _ready():
 	tilemap.set_visible(false)
 	init_non_tile_entities()
