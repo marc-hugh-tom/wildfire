@@ -29,6 +29,6 @@ animations = [ {
 [node name="fire" type="AnimatedSprite"]
 frames = SubResource( 1 )
 animation = "burn"
-frame = 10
+frame = 15
 speed_scale = 2.0
 playing = true

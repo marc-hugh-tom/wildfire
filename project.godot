@@ -34,6 +34,7 @@ window/size/height=576
 2d_physics/layer_3="firework"
 2d_physics/layer_4="ice"
 2d_physics/layer_5="water"
+2d_physics/layer_6="rock"
 2d_physics/layer_16="target"
 
 [rendering]

@@ -21,3 +21,5 @@ func _process(delta):
 func _on_area_entered(entity):
 	if entity.get_collision_layer_bit(4):
 		queue_free()
+	if entity.get_collision_layer_bit(5):
+		queue_free()

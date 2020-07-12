@@ -3,7 +3,7 @@
 [ext_resource path="res://scripts/water.gd" type="Script" id=1]
 [ext_resource path="res://assets/water.png" type="Texture" id=2]
 
-[sub_resource type="CircleShape2D" id=2]
+[sub_resource type="CircleShape2D" id=1]
 radius = 9.75531
 
 [node name="water" type="Node2D"]
@@ -18,4 +18,4 @@ collision_layer = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2( 0.353561, 0 )
-shape = SubResource( 2 )
+shape = SubResource( 1 )

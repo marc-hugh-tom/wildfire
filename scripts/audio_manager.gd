@@ -8,7 +8,7 @@ var sound_library = {
 	"woo": ["res://assets/sounds/woo.wav", -3],
 	"aww": ["res://assets/sounds/aww.wav", -3],
 	"invalid": ["res://assets/sounds/invalid_position.wav", -1],
-	"valid": ["res://assets/sounds/valid_position.wav", -3],
+	"valid": ["res://assets/sounds/valid_position.wav", -12],
 	"level_1": ["res://assets/sounds/level_1.ogg", -10],
 	"level_2": ["res://assets/sounds/level_2.ogg", -10]
 }
