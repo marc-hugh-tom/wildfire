@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://scripts/play_scene.gd" type="Script" id=1]
 [ext_resource path="res://assets/ui/hud.png" type="Texture" id=2]
@@ -22,6 +22,10 @@ font_data = ExtResource( 3 )
 
 [sub_resource type="DynamicFont" id=4]
 size = 24
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 20
 font_data = ExtResource( 3 )
 
 [node name="play_scene" type="Node2D"]
@@ -273,13 +277,25 @@ __meta__ = {
 }
 
 [node name="margin" type="MarginContainer" parent="hud/win_message/hbox"]
-margin_left = 493.0
-margin_top = 5.0
-margin_right = 635.0
-margin_bottom = 91.0
+margin_left = 498.0
+margin_right = 640.0
+margin_bottom = 96.0
 
 [node name="next_level" type="Button" parent="hud/win_message/hbox/margin"]
 margin_right = 142.0
-margin_bottom = 86.0
+margin_bottom = 96.0
 custom_fonts/font = ExtResource( 4 )
 text = "Next Level"
+
+[node name="tutorial_text" type="Label" parent="hud"]
+visible = false
+margin_left = 64.0
+margin_top = 424.0
+margin_right = 960.0
+margin_bottom = 472.0
+custom_fonts/font = SubResource( 5 )
+text = "Lorem Ipsom"
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}

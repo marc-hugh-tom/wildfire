@@ -1,5 +1,7 @@
 extends Node2D
 
+signal play_sound
+
 var firework = preload("res://nodes/firework.tscn")
 
 signal target_hit

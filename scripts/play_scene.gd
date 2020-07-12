@@ -3,10 +3,9 @@ extends Node2D
 signal quit
 signal play_sound
 
-# DEBUG
-const debug_level = preload("res://nodes/level_1.tscn")
+const first_level = preload("res://levels/level_1.tscn")
 
-var packaged_current_level = debug_level
+var packaged_current_level = first_level
 var current_level
 
 var placement_cursor
@@ -54,6 +53,16 @@ func add_level(level):
 	update_money()
 	init_timer(current_level.get_start_time_seconds())
 	init_next_level_button()
+	init_tutorial_text()
+	set_play_stop_to_play()
+
+func init_tutorial_text():
+	var text = current_level.get_tutorial_text()
+	if text == "":
+		$hud/tutorial_text.set_visible(false)
+	else:
+		$hud/tutorial_text.set_text(text)
+		$hud/tutorial_text.set_visible(true)
 
 func hide_messages():
 	$hud/time_message.set_visible(false)
@@ -75,7 +84,11 @@ func on_success():
 	$hud/win_message.set_visible(true)
 
 func init_next_level_button():
-	pass #TODO
+	$hud/win_message/hbox/margin/next_level.connect("button_up", self, "go_to_next_level")
+
+func go_to_next_level():
+	packaged_current_level = load("res://levels/" + current_level.get_next_level() + ".tscn")
+	add_level(packaged_current_level)
 
 func init_placement_cursor():
 	placement_cursor = Node2D.new()
@@ -225,7 +238,16 @@ func swap_play_stop_button():
 		button.set_text("Play")
 		button.set_button_icon(load("res://assets/ui/play_icon.png"))
 
+func set_play_stop_to_play():
+	var button = $hud.get_node("background/simulation_buttons/start_stop")
+	button.set_text("Play")
+	button.set_button_icon(load("res://assets/ui/play_icon.png"))
+
 func init_timer(time):
+	if has_node("Timer"):
+		var timer_to_delete = get_node("Timer")
+		remove_child(timer_to_delete)
+		timer_to_delete.queue_free()
 	var timer = Timer.new()
 	timer.name = "Timer"
 	timer.set_wait_time(time)
