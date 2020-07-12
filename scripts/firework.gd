@@ -38,7 +38,7 @@ func on_heat_incremented(heat):
 func _process(delta):
 	if flying:
 		var angle = get_rotation()
-		var direction = Vector2(cos(angle), -sin(angle))
+		var direction = Vector2(cos(angle), sin(angle))
 		position = lerp(position, position + (direction * speed), delta)
 
 func get_directions():
@@ -80,7 +80,7 @@ func _on_area_entered(entity):
 		]
 		for direction in directions:
 			var flame = FLAME.instance()
-			flame.set_position(Vector2(16, 0))
+			flame.set_position(Vector2(16, 16))
 			flame.set_direction(direction)
 			entity.get_parent().add_child(flame)
 		queue_free()

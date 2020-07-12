@@ -1,8 +1,10 @@
 extends Node
 
-var _rotation = 0
+var _rotation: float
 
 func _rotate():
+	if _rotation == null:
+		_rotation = get_parent().get_rotation()
 	_rotation += PI/2
 
 func _process(delta):
