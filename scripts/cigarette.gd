@@ -22,7 +22,7 @@ func get_description():
 	
 func on_fuel_depleted():
 	.on_fuel_depleted()
-	$Sprite.set_texture(burnt_cigarette)
+	$AnimatedSprite.set_animation("burnt")
 	if has_node("Area2D"):
 		$Area2D.queue_free()
 
