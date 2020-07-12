@@ -15,7 +15,7 @@ func get_next_level():
 	return "level_9"
 
 func get_tutorial_text():
-	return("You're on your own!")
+	return("You're on your own! Every man and woman for themselves!")
 
 func get_music_path():
 	return "level_1"

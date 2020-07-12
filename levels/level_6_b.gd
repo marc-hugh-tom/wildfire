@@ -5,17 +5,17 @@ func get_start_money():
 
 func get_available_items():
 	return [
-		"Plant Killer", "Ice Cube"
+		"Ice Cube", "Plant Killer"
 	]
 
 func get_start_time_seconds():
-	return 20
+	return 50
 
 func get_next_level():
-	return "level_6_a"
+	return "level_7"
 
 func get_tutorial_text():
-	return("I don't want to burn down my house, I just want to chill.")
+	return("People say I have a short fuse.")
 
 func get_music_path():
 	return "level_2"
