@@ -100,7 +100,7 @@ func plantkiller_validity(world_position):
 					return(true)
 	return(false)
 
-func plantkiller_application(world_position):
+func plantkiller_application(world_position, item_rotation):
 	for child in get_children():
 		if child.has_method("get_placeable_name"):
 			if child.get_placeable_name() == "tree":
@@ -119,10 +119,14 @@ func cigarette_validity(world_position):
 				return(false)
 	return(true)
 
-func cigarette_application(world_position):
+func cigarette_application(world_position, item_rotation):
 	var cigarette = CIGARETTE.instance()
 	cigarette.connect("play_sound", self, "play_sound")
+	cigarette.set_rotation(item_rotation)
 	cigarette.set_position(tilemap.map_to_world(tilemap.world_to_map(world_position)) + Vector2(16,16))
+	var rotatable_node = cigarette.get_node("Rotatable")
+	cigarette.remove_child(rotatable_node)
+	rotatable_node.queue_free()
 	add_child(cigarette)
 
 func petrol_validity(world_position):
@@ -132,7 +136,7 @@ func petrol_validity(world_position):
 				return(false)
 	return(true)
 
-func petrol_application(world_position):
+func petrol_application(world_position, item_rotation):
 	var petrol = PETROL_CAN.instance()
 	petrol.connect("play_sound", self, "play_sound")
 	petrol.set_position(tilemap.map_to_world(tilemap.world_to_map(world_position)))
@@ -145,7 +149,7 @@ func ice_block_validity(world_position):
 				return(false)
 	return(true)
 
-func ice_block_application(world_position):
+func ice_block_application(world_position, item_rotation):
 	var ice = ICE_BLOCK.instance()
 	ice.connect("play_sound", self, "play_sound")
 	ice.set_position(tilemap.map_to_world(tilemap.world_to_map(world_position)))
@@ -158,8 +162,12 @@ func firework_validity(world_position):
 				return(false)
 	return(true)
 
-func firework_application(world_position):
-	var petrol = FIREWORK.instance()
-	petrol.set_position(tilemap.map_to_world(tilemap.world_to_map(world_position))+Vector2(16,16))
-	add_child(petrol)
+func firework_application(world_position, item_rotation):
+	var firework = FIREWORK.instance()
+	firework.set_rotation(item_rotation)
+	firework.set_position(tilemap.map_to_world(tilemap.world_to_map(world_position))+Vector2(16,16))
+	var rotatable_node = firework.get_node("Rotatable")
+	firework.remove_child(rotatable_node)
+	rotatable_node.queue_free()
+	add_child(firework)
 
