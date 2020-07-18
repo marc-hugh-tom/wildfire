@@ -83,6 +83,7 @@ func _on_area_entered(entity):
 			var flame = FLAME.instance()
 			flame.set_position(position)
 			flame.set_direction(direction)
+			flame.apply_random_colour()
 			# Oh shiii
 			entity.get_parent().get_parent().call_deferred("add_child", flame)
 		emit_signal("play_sound", "explosion")

@@ -4,6 +4,8 @@ var speed = 3
 var direction = Vector2.ZERO
 var target_position = Vector2.ZERO
 
+const colour_shader = preload("res://shaders/random_colour.shader")
+
 func _ready():
 	$Area2D.connect("area_entered", self, "_on_area_entered")
 
@@ -23,3 +25,11 @@ func _on_area_entered(entity):
 		queue_free()
 	if entity.get_collision_layer_bit(5):
 		queue_free()
+
+func apply_random_colour():
+	var mat = ShaderMaterial.new()
+	mat.set_shader(colour_shader)
+	mat.set_shader_param("r_rand", randf())
+	mat.set_shader_param("g_rand", randf())
+	mat.set_shader_param("b_rand", randf())
+	$AnimatedSprite.set_material(mat)
